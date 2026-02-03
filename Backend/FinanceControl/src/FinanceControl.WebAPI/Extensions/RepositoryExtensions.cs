@@ -7,6 +7,7 @@ namespace FinanceControl.WebAPI.Extensions;
 
 public static class RepositoryExtension
 {
+    // Injecão de dependências para os repositórios
     public static IServiceCollection InjectRepositories(this IServiceCollection services)
     {
         services.AddScoped<IPeopleRepository, PeopleRepository>();

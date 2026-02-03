@@ -11,10 +11,10 @@ namespace FinanceControl.Repositories.Base;
 
 public abstract class BaseRepository : IDisposable
 {
-    public readonly MySqlConnection _mySqlConnection;
+    public readonly MySqlConnection _mySqlConnection; // Conexão com MySQL
     private HttpContext? _context;
-    private readonly ILogger _logger;
-    protected static ICrudLoggerRepository? _crudLoggerRepositoryStatic;
+    private readonly ILogger _logger; 
+    protected static ICrudLoggerRepository? _crudLoggerRepositoryStatic; // Logger de CRUD
 
     protected BaseRepository(MySqlConnection mySqlConnection, ILogger logger, IHttpContextAccessor httpContextAccessor)
     {
@@ -25,10 +25,10 @@ public abstract class BaseRepository : IDisposable
 
     public static void ConfigureCrudLogger(ICrudLoggerRepository logger)
     {
-        _crudLoggerRepositoryStatic = logger;
+        _crudLoggerRepositoryStatic = logger; // Configura logger de CRUD estático
     }
 
-    protected Guid GetUserId()
+    protected Guid GetUserId() // Pega ID do usuário logado
     {
         try
         {
@@ -42,21 +42,7 @@ public abstract class BaseRepository : IDisposable
         }
     }
 
-    protected Guid GetTenantId()
-    {
-        try
-        {
-            var identity = _context?.User.Identity as ClaimsIdentity;
-            var usuarioId = identity?.FindFirst("_Texec")?.Value;
-            return usuarioId != null ? Guid.Parse(usuarioId) : Guid.Empty;
-        }
-        catch
-        {
-            return Guid.Empty;
-        }
-    }
-
-    protected string GetUserName()
+    protected string GetUserName() // Pega nome do usuário
     {
         try
         {
@@ -64,12 +50,13 @@ public abstract class BaseRepository : IDisposable
             var nome = identity?.FindFirst("Name")?.Value;
             return nome ?? string.Empty;
         }
-        catch (Exception)
+        catch
         {
             return string.Empty;
         }
     }
 
+    // Executa INSERT/UPDATE/DELETE e registra log se necessário
     protected async Task<bool> ExecuteAsync(string sql, object parameters, CrudAction? action = null)
     {
         if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
@@ -95,7 +82,7 @@ public abstract class BaseRepository : IDisposable
         }
     }
 
-    protected async Task<T> GetOneAsync<T>(string sql, object filters)
+    protected async Task<T> GetOneAsync<T>(string sql, object filters) // Pega um registro
     {
         try
         {
@@ -107,12 +94,10 @@ public abstract class BaseRepository : IDisposable
         }
     }
 
-    protected async Task<IEnumerable<T>> GetListAsync<T>(string sql, object? filters)
+    protected async Task<IEnumerable<T>> GetListAsync<T>(string sql, object? filters) // Pega vários registros
     {
         if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
-        {
             await _mySqlConnection.OpenAsync();
-        }
 
         try
         {
@@ -124,12 +109,10 @@ public abstract class BaseRepository : IDisposable
         }
     }
 
-    protected bool AlreadyExists(string sql, object filters)
+    protected bool AlreadyExists(string sql, object filters) // Verifica se registro existe
     {
         if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
-        {
             _mySqlConnection.Open();
-        }
 
         try
         {
@@ -142,6 +125,7 @@ public abstract class BaseRepository : IDisposable
         }
     }
 
+    // Múltiplos joins usando Dapper
     protected async Task<IEnumerable<TResult>> GetMultiListAsync<TResult, T1, T2, T3, T4, T5, T6>(
         string sql,
         Func<TResult, T1, T2, T3, T4, T5, T6, TResult> map,
@@ -152,9 +136,7 @@ public abstract class BaseRepository : IDisposable
         try
         {
             if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
-            {
                 await _mySqlConnection.OpenAsync();
-            }
 
             return await _mySqlConnection.QueryAsync<TResult, T1, T2, T3, T4, T5, T6, TResult>(
                 sql,
@@ -170,139 +152,63 @@ public abstract class BaseRepository : IDisposable
         }
     }
 
-    protected static void AddFilter<T>(
-      StringBuilder sql,
-      DynamicParameters parameters,
-      T value,
-      string condition,
-      string paramName)
+    // Métodos auxiliares para filtros SQL
+    protected static void AddFilter<T>(StringBuilder sql, DynamicParameters parameters, T value, string condition, string paramName)
     {
-        if (value == null)
-            return;
-
+        if (value == null) return;
         sql.AppendLine($"AND {condition}");
         parameters.Add(paramName, value);
     }
 
-    protected static void AddLikeFilter<T>(
-        StringBuilder sql,
-        DynamicParameters parameters,
-        T value,
-        string condition,
-        string paramName)
+    protected static void AddLikeFilter<T>(StringBuilder sql, DynamicParameters parameters, T value, string condition, string paramName)
     {
         var text = value?.ToString();
-
-        if (string.IsNullOrWhiteSpace(text))
-            return;
-
+        if (string.IsNullOrWhiteSpace(text)) return;
         sql.AppendLine($"AND {condition}");
         parameters.Add(paramName, $"%{text}%");
     }
 
-    protected static void AddDatePartsFilter(
-        StringBuilder sql,
-        DynamicParameters parameters,
-        string column,
-        int? year,
-        int? month,
-        int? day,
-        string prefix)
+    protected static void AddDatePartsFilter(StringBuilder sql, DynamicParameters parameters, string column, int? year, int? month, int? day, string prefix)
     {
         var parts = new List<string>();
-
-        if (year.HasValue)
-        {
-            parts.Add($"YEAR({column}) = @{prefix}Year");
-            parameters.Add($"{prefix}Year", year.Value);
-        }
-
-        if (month.HasValue)
-        {
-            parts.Add($"MONTH({column}) = @{prefix}Month");
-            parameters.Add($"{prefix}Month", month.Value);
-        }
-
-        if (day.HasValue)
-        {
-            parts.Add($"DAY({column}) = @{prefix}Day");
-            parameters.Add($"{prefix}Day", day.Value);
-        }
-
-        if (parts.Count == 0)
-            return;
-
-        sql.AppendLine("AND " + string.Join(" AND ", parts));
+        if (year.HasValue) { parts.Add($"YEAR({column}) = @{prefix}Year"); parameters.Add($"{prefix}Year", year.Value); }
+        if (month.HasValue) { parts.Add($"MONTH({column}) = @{prefix}Month"); parameters.Add($"{prefix}Month", month.Value); }
+        if (day.HasValue) { parts.Add($"DAY({column}) = @{prefix}Day"); parameters.Add($"{prefix}Day", day.Value); }
+        if (parts.Count > 0) sql.AppendLine("AND " + string.Join(" AND ", parts));
     }
 
-    protected static void AddRangeFilter<T>(
-        StringBuilder sql,
-        DynamicParameters parameters,
-        T? from,
-        T? to,
-        string column,
-        string prefix) where T : struct
+    protected static void AddRangeFilter<T>(StringBuilder sql, DynamicParameters parameters, T? from, T? to, string column, string prefix) where T : struct
     {
-        if (from.HasValue)
-        {
-            sql.AppendLine($"AND {column} >= @{prefix}From");
-            parameters.Add($"{prefix}From", from.Value);
-        }
-
-        if (to.HasValue)
-        {
-            sql.AppendLine($"AND {column} <= @{prefix}To");
-            parameters.Add($"{prefix}To", to.Value);
-        }
+        if (from.HasValue) { sql.AppendLine($"AND {column} >= @{prefix}From"); parameters.Add($"{prefix}From", from.Value); }
+        if (to.HasValue) { sql.AppendLine($"AND {column} <= @{prefix}To"); parameters.Add($"{prefix}To", to.Value); }
     }
 
-    protected static void AddDateFilter(
-        StringBuilder sql,
-        DynamicParameters parameters,
-        DateTime? from,
-        DateTime? to,
-        string column,
-        string prefix)
+    protected static void AddDateFilter(StringBuilder sql, DynamicParameters parameters, DateTime? from, DateTime? to, string column, string prefix)
     {
-        if (from.HasValue)
-        {
-            sql.AppendLine($"AND {column} >= @{prefix}From");
-            parameters.Add($"{prefix}From", from.Value.Date);
-        }
-
-        if (to.HasValue)
-        {
-            sql.AppendLine($"AND {column} <= @{prefix}To");
-            parameters.Add($"{prefix}To", to.Value.Date);
-        }
+        if (from.HasValue) { sql.AppendLine($"AND {column} >= @{prefix}From"); parameters.Add($"{prefix}From", from.Value.Date); }
+        if (to.HasValue) { sql.AppendLine($"AND {column} <= @{prefix}To"); parameters.Add($"{prefix}To", to.Value.Date); }
     }
 
+    // Métodos para log de erro
     protected void LogError(Exception exception, string methodName, string sql, object? parameters)
     {
         var methodDetails = new { Name = methodName, SQL = sql, Parameters = parameters };
-
-        _logger.LogError(exception, "Error: {Error}. Method: {Method}.",
-            GetError(exception), methodDetails);
+        _logger.LogError(exception, "Error: {Error}. Method: {Method}.", GetError(exception), methodDetails);
     }
 
     protected void LogError(Exception exception, string methodName, string sql)
     {
         var methodDetails = new { Name = methodName, SQL = sql };
-
-        _logger.LogError(exception, "Error: {Error}. Method: {Method}.",
-            GetError(exception), methodDetails);
+        _logger.LogError(exception, "Error: {Error}. Method: {Method}.", GetError(exception), methodDetails);
     }
 
     protected void LogErrorMongo(Exception exception, string methodName, object? parameters)
     {
         var methodDetails = new { Name = methodName, Parameters = parameters };
-
-        _logger.LogError(exception, "Error: {Error}. Method: {Method}.",
-            GetError(exception), methodDetails);
+        _logger.LogError(exception, "Error: {Error}. Method: {Method}.", GetError(exception), methodDetails);
     }
 
-    private static string GetError(Exception exception)
-        => exception.InnerException is not null ? exception.InnerException.Message : exception.Message;
+    private static string GetError(Exception exception) => exception.InnerException is not null ? exception.InnerException.Message : exception.Message;
 
-    public void Dispose() => _mySqlConnection?.Dispose();
+    public void Dispose() => _mySqlConnection?.Dispose(); // Libera conexão
 }

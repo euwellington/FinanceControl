@@ -7,6 +7,7 @@ namespace FinanceControl.WebAPI.Extensions;
 
 public static class ServiceExtension
 {
+    // Injecão de dependências para os serviços
     public static IServiceCollection InjectServices(this IServiceCollection services)
     {
         services.AddScoped<IHubService, HubService>();

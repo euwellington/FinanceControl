@@ -11,6 +11,9 @@ public static class JwtExtension
 {
     public static IServiceCollection AddJwt(this IServiceCollection service)
     {
+
+        // Configura o Swagger para usar autenticação JWT
+
         service.AddSwaggerGen(options =>
         {
             options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

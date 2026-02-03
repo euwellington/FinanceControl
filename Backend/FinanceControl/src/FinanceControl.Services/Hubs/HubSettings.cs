@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace FinanceControl.Services.Hubs;
 
-
+// Hub do SignalR para comunicação em tempo real
 public class HubSettings : Hub
 {
     public async Task JoinGroup(string groupName) => await Groups.AddToGroupAsync(Context.ConnectionId, groupName);

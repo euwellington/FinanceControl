@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+// Configurações básicas do ASP.NET
 builder.Services.AddControllers()
     .AddJsonOptions(opts =>
         opts.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter()));
@@ -17,10 +17,10 @@ builder.Services.AddServices();
 
 var app = builder.Build();
 
+// Configuração do logger de CRUD
 using (var scope = app.Services.CreateScope())
 {
     var provider = scope.ServiceProvider;
-
     var mySqlConnection = provider.GetRequiredService<MySqlConnection>();
     var logger = provider.GetRequiredService<ILogger<CrudLoggerRepository>>();
     var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
@@ -30,11 +30,13 @@ using (var scope = app.Services.CreateScope())
     BaseRepository.ConfigureCrudLogger(crudLogger);
 }
 
+// Inicializa o banco
 using (var scope = app.Services.CreateScope())
 {
     var dbInitializer = scope.ServiceProvider.GetRequiredService<InitializeDB>();
 }
 
+// Swagger só no desenvolvimento
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

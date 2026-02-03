@@ -11,14 +11,17 @@ public static class ContextExtension
 {
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
+        // Mostra informações detalhadas de identidade para debug
         IdentityModelEventSource.ShowPII = true;
 
+        // Configura controllers com suporte a enums como string no JSON
         services.AddControllers()
             .AddNewtonsoftJson(options =>
                 options.SerializerSettings.Converters.Add(new StringEnumConverter()));
 
         services.AddEndpointsApiExplorer();
 
+        // Configura Swagger (documentação da API)
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
@@ -34,18 +37,20 @@ public static class ContextExtension
                 }
             });
 
+            // Inclui comentários XML no Swagger
             var xmlFile = $"{System.Reflection.Assembly.GetExecutingAssembly().GetName().Name}.xml";
             var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
             c.IncludeXmlComments(xmlPath);
         });
 
-        services.AddRouting(options => options.LowercaseUrls = true);
+        services.AddRouting(options => options.LowercaseUrls = true); // URLs em minúsculo
 
-        services.AddInjections();
-        services.AddJwt();
-        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-        services.AddAuthorization();
+        services.AddInjections(); // Injeta bancos, repositórios e serviços
+        services.AddJwt();        // Configura JWT
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); // Mapeamento automático
+        services.AddAuthorization(); // Autorização
 
+        // Configura CORS global
         services.AddCors(options =>
         {
             options.AddPolicy("AllowAll", builder =>
@@ -61,7 +66,7 @@ public static class ContextExtension
                 new[] { "application/octet-stream" });
         });
 
-        services.AddSignalR();
+        services.AddSignalR(); // Configura SignalR (websockets)
 
         return services;
     }
@@ -70,6 +75,7 @@ public static class ContextExtension
     {
         services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+        // Injeta bancos, repositórios e serviços
         services
             .InjectDataBases()
             .InjectRepositories()
@@ -90,17 +96,17 @@ public static class ContextExtension
         }
 
         app.UseResponseCompression();
-        app.UseCors("AllowAll");
+        app.UseCors("AllowAll");      // Aplica CORS
 
         app.UseRouting();
 
-        app.UseAuthentication();
+        app.UseAuthentication(); // JWT
         app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllers();
-            endpoints.MapHub<HubSettings>("hub");
+            endpoints.MapControllers(); // Mapeia endpoints dos controllers
+            endpoints.MapHub<HubSettings>("hub"); // Mapeia hub do SignalR
         });
 
         return app;
