@@ -1,0 +1,45 @@
+name: dockercompose9435818347292144170
+services:
+  financecontrol.webapi:
+    build:
+      context: C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl
+      dockerfile: src/FinanceControl.WebAPI/Dockerfile
+    container_name: financecontrolwebapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_URLS: http://+:2026
+      JTW_SECRET_KEY_SERVICE_WEBAPI: EFBDAE5A-3CE0-4178-BCEA-52A686951FDB
+      JWTSETTINGS_EXPIREINHOURS_WEBAPI: "25"
+      JWTSETTINGS_VALIDAUDIENCE: https://localhost
+      JWTSETTINGS_VALIDISSUER: SERVICE_AUTHENTICATION
+      MONGODB_COLLECTION_LOGS: Logs
+      MONGODB_DATABASE: FINANCE
+      MONGODB_IP: mongodb.atlasmonitoramento.com.br
+      MONGODB_PASS: M=PnR]}!rVy+ArQx9c
+      MONGODB_PORT: "27017"
+      MONGODB_USER: atlasmonitoramento
+      MYSQL_DB: financial
+      MYSQL_PASS: nrV_i:NhQLk^3]@39G
+      MYSQL_PORT: "3306"
+      MYSQL_SERVER: db-cluster-prod.atlasmonitoramento.com.br
+      MYSQL_USER: atlasmonitoramento
+      TZ: America/Fortaleza
+      VALIDATION_SERVICE_WEBAPI: 6B341FA5-87F7-4D30-A5A9-18C9960D0E13
+    image: localhost:6000/financecontrolwebapi
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 2026
+        published: "2026"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind: {}
+networks:
+  default:
+    name: dockercompose9435818347292144170_default

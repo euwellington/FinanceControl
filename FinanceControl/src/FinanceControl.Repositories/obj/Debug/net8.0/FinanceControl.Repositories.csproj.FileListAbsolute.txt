@@ -1,0 +1,15 @@
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\bin\Debug\net8.0\FinanceControl.Repositories.deps.json
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\bin\Debug\net8.0\FinanceControl.Repositories.dll
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\bin\Debug\net8.0\FinanceControl.Repositories.pdb
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\obj\Debug\net8.0\FinanceControl.Repositories.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\obj\Debug\net8.0\FinanceControl.Repositories.AssemblyInfoInputs.cache
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\obj\Debug\net8.0\FinanceControl.Repositories.AssemblyInfo.cs
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\obj\Debug\net8.0\FinanceControl.Repositories.csproj.CoreCompileInputs.cache
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\obj\Debug\net8.0\FinanceControl.Repositories.dll
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\obj\Debug\net8.0\refint\FinanceControl.Repositories.dll
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\obj\Debug\net8.0\FinanceControl.Repositories.pdb
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\obj\Debug\net8.0\ref\FinanceControl.Repositories.dll
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\bin\Debug\net8.0\FinanceControl.Models.dll
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\bin\Debug\net8.0\FinanceControl.Models.pdb
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\obj\Debug\net8.0\FinanceControl.Repositories.csproj.AssemblyReference.cache
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Repositories\obj\Debug\net8.0\FinanceC.8E6FBB4D.Up2Date

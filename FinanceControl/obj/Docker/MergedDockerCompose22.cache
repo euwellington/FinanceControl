@@ -1,0 +1,98 @@
+name: dockercompose9435818347292144170
+services:
+  financecontrol.webapi:
+    build:
+      context: C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl
+      dockerfile: src/FinanceControl.WebAPI/Dockerfile
+    container_name: financecontrolwebapi
+    depends_on:
+      mongodb:
+        condition: service_started
+        required: true
+      mysql:
+        condition: service_started
+        required: true
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_URLS: http://+:2026
+      JTW_SECRET_KEY_SERVICE_WEBAPI: EFBDAE5A-3CE0-4178-BCEA-52A686951FDB
+      JWTSETTINGS_EXPIREINHOURS_WEBAPI: "25"
+      JWTSETTINGS_VALIDAUDIENCE: https://localhost
+      JWTSETTINGS_VALIDISSUER: SERVICE_AUTHENTICATION
+      MONGODB_COLLECTION_LOGS: Logs
+      MONGODB_DATABASE: FINANCE
+      MONGODB_IP: mongodb
+      MONGODB_PASS: Tq6vF3RwH2
+      MONGODB_PORT: "27017"
+      MONGODB_USER: mongoadmin
+      MYSQL_DB: financial
+      MYSQL_PASS: Ue7kB1ZxV9
+      MYSQL_PORT: "3306"
+      MYSQL_SERVER: mysql
+      MYSQL_USER: financeuser
+      TZ: America/Fortaleza
+      VALIDATION_SERVICE_WEBAPI: 6B341FA5-87F7-4D30-A5A9-18C9960D0E13
+    image: localhost:6000/financecontrolwebapi
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 2026
+        published: "2026"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind: {}
+  mongodb:
+    container_name: financecontrol_mongo
+    environment:
+      MONGO_INITDB_DATABASE: FINANCE
+      MONGO_INITDB_ROOT_PASSWORD: Tq6vF3RwH2
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+    image: mongo:6.0
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 27017
+        published: "27017"
+        protocol: tcp
+    restart: always
+    volumes:
+      - type: volume
+        source: mongo_data
+        target: /data/db
+        volume: {}
+  mysql:
+    container_name: financecontrol_mysql
+    environment:
+      MYSQL_DATABASE: financial
+      MYSQL_PASSWORD: Ue7kB1ZxV9
+      MYSQL_ROOT_PASSWORD: Rf8uY2LpQ4
+      MYSQL_USER: financeuser
+    image: mysql:8.0
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 3306
+        published: "3306"
+        protocol: tcp
+    restart: always
+    volumes:
+      - type: volume
+        source: mysql_data
+        target: /var/lib/mysql
+        volume: {}
+networks:
+  default:
+    name: dockercompose9435818347292144170_default
+volumes:
+  mongo_data:
+    name: dockercompose9435818347292144170_mongo_data
+  mysql_data:
+    name: dockercompose9435818347292144170_mysql_data

@@ -1,0 +1,12 @@
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Models\bin\Debug\net8.0\FinanceControl.Models.deps.json
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Models\bin\Debug\net8.0\FinanceControl.Models.dll
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Models\bin\Debug\net8.0\FinanceControl.Models.pdb
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Models\obj\Debug\net8.0\FinanceControl.Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Models\obj\Debug\net8.0\FinanceControl.Models.AssemblyInfoInputs.cache
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Models\obj\Debug\net8.0\FinanceControl.Models.AssemblyInfo.cs
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Models\obj\Debug\net8.0\FinanceControl.Models.csproj.CoreCompileInputs.cache
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Models\obj\Debug\net8.0\FinanceControl.Models.dll
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Models\obj\Debug\net8.0\refint\FinanceControl.Models.dll
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Models\obj\Debug\net8.0\FinanceControl.Models.pdb
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Models\obj\Debug\net8.0\ref\FinanceControl.Models.dll
+C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl\src\FinanceControl.Models\obj\Debug\net8.0\FinanceControl.Models.csproj.AssemblyReference.cache

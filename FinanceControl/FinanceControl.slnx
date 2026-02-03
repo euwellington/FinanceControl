@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
+  <Project Path="src/FinanceControl.Models/FinanceControl.Models.csproj" Id="abfc771d-c8fc-4e50-8e00-3ec757ce6869" />
+  <Project Path="src/FinanceControl.Repositories/FinanceControl.Repositories.csproj" Id="fc7d095e-e248-464a-beee-6b8444bcd29b" />
+  <Project Path="src/FinanceControl.Services/FinanceControl.Services.csproj" Id="f90af05e-6de8-4e69-b84d-b473e9e850b1" />
+  <Project Path="src/FinanceControl.Tests/FinanceControl.Tests.csproj" Id="a1b5339c-9a97-45e4-a930-f557bbda67e9" />
+  <Project Path="src/FinanceControl.WebAPI/FinanceControl.WebAPI.csproj" Id="f5d2d343-57ba-488b-af5d-3a20625db3f4" />
+</Solution>

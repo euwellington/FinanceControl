@@ -1,0 +1,79 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: financecontrol_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Rf8uY2LpQ4
+      MYSQL_DATABASE: financial
+      MYSQL_USER: financeuser
+      MYSQL_PASSWORD: Ue7kB1ZxV9
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "financeuser", "-pUe7kB1ZxV9"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  mongodb:
+    image: mongo:6.0
+    container_name: financecontrol_mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+      MONGO_INITDB_ROOT_PASSWORD: Tq6vF3RwH2
+      MONGO_INITDB_DATABASE: FINANCE
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping') || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 10
+      start_period: 20s
+
+  financecontrol.webapi:
+    container_name: financecontrolwebapi
+    build:
+      context: .
+      dockerfile: src/FinanceControl.WebAPI/Dockerfile
+    image: localhost:6000/financecontrolwebapi
+    restart: always
+    ports:
+      - "2026:2026"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:2026
+      TZ: America/Fortaleza
+
+      MYSQL_SERVER: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DB: financial
+      MYSQL_USER: financeuser
+      MYSQL_PASS: Ue7kB1ZxV9
+
+      MONGODB_DATABASE: FINANCE
+      MONGODB_COLLECTION_LOGS: Logs
+      MONGODB_IP: mongodb
+      MONGODB_PORT: 27017
+      MONGODB_USER: mongoadmin
+      MONGODB_PASS: Tq6vF3RwH2
+    depends_on:
+      mysql:
+        condition: service_healthy
+      mongodb:
+        condition: service_started
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+
+volumes:
+  mysql_data:
+  mongo_data:

@@ -1,0 +1,32 @@
+name: dockercompose9435818347292144170
+services:
+  financecontrol.webapi:
+    build:
+      context: C:\Users\wellington\Documents\Projetos\Teste técnico\FinanceControl\FinanceControl
+      dockerfile: src/FinanceControl.WebAPI/Dockerfile
+    container_name: financecontrolwebapi
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_HTTP_PORTS: "8080"
+      ASPNETCORE_URLS: http://+:2026
+      JWTSETTINGS_EXPIREINHOURS_WEBAPI: "25"
+      JWTSETTINGS_VALIDAUDIENCE: https://localhost
+      JWTSETTINGS_VALIDISSUER: SERVICE_AUTHENTICATION
+      TZ: America/Fortaleza
+    image: localhost:6000/financecontrolwebapi
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 2026
+        published: "2026"
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: /etc/localtime
+        target: /etc/localtime
+        read_only: true
+        bind: {}
+networks:
+  default:
+    name: dockercompose9435818347292144170_default

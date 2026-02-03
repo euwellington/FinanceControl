@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "SSwqX837ScA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\wellington\\Documents\\Projetos\\Teste técnico\\FinanceControl\\FinanceControl\\src\\FinanceControl.Models\\FinanceControl.Models.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\wellington\\.nuget\\packages\\mongodb.bson\\3.6.0\\mongodb.bson.3.6.0.nupkg.sha512",
+    "C:\\Users\\wellington\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\wellington\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}
