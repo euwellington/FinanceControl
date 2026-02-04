@@ -48,10 +48,10 @@ services:
     image: localhost:6000/financecontrolwebapi
     restart: always
     ports:
-      - "2026:2026"
+      - "5701:5701"
     environment:
       ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: http://+:2026
+      ASPNETCORE_URLS: http://+:5701
       TZ: America/Fortaleza
 
       MYSQL_SERVER: mysql

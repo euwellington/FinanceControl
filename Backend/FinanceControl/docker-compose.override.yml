@@ -2,7 +2,6 @@ services:
   financecontrol.webapi:
     environment:
     - ASPNETCORE_ENVIRONMENT=Development
-    - ASPNETCORE_HTTP_PORTS=8080
   
     - JWTSETTINGS_VALIDISSUER=SERVICE_AUTHENTICATION
     - JWTSETTINGS_VALIDAUDIENCE=https://localhost
