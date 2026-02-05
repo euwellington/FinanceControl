@@ -16,6 +16,6 @@ public interface IReportRepository
     Task<(decimal TotalIncome, decimal TotalExpense)> GetTotalIncomeExpense();
 
     // Listagem de todas as transições por categorias
-    Task<PagedResponse<PersonTotal>> GetTransactionsCategory(ReportTransactionCategoryModel request);
+    Task<PagedResponse<CategoryTotal>> GetTransactionsCategory(ReportTransactionCategoryModel request);
     Task<(decimal TotalIncome, decimal TotalExpense)> GetTotalIncomeExpenseByCategory();
 }

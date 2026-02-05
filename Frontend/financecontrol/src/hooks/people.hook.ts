@@ -1,7 +1,7 @@
 import { handleApiError } from "@/utils/error-handler";
 import { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import type { IPeople, IPeopleQueryParams } from "@/interfaces/IPeople";
+import type { IPeople } from "@/interfaces/IPeople";
 import PeopleAPI from "@/apis/PeopleAPI";
 import { StoresContext } from "@/stores/inject";
 

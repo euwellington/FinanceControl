@@ -1,12 +1,14 @@
 ﻿using FinanceControl.Models.Paramaters;
 using FinanceControl.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace FinanceControl.WebAPI.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     [Produces("application/json")]
     public class ReportController : ControllerBase

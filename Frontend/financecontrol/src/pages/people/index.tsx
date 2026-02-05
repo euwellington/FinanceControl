@@ -6,7 +6,7 @@ import { useContext, useEffect, useMemo } from 'react'
 import { StoresContext } from '@/stores/inject'
 import DataTable from './data-table'
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Users, UserPlus, ArrowUp, ArrowDown, BarChart3 } from "lucide-react"
+import { Users, ArrowUp, ArrowDown, BarChart3 } from "lucide-react"
 import AddPeople from "@/components/forms/dialog/people/add"
 import { Skeleton } from "@/components/ui/skeleton"
 

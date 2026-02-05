@@ -14,7 +14,6 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarMenu,
-  SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
@@ -39,10 +38,9 @@ export function NavDoc({
   const { pathname } = useLocation()
 
   React.useEffect(() => {
-    const activeItem = projects.flatMap(p => [
-      { title: p.name, url: p.url },
-      ...(p.items || [])
-    ]).find(i => i.url === pathname)
+    const activeItem = projects
+      .flatMap(p => [{ title: p.name, url: p.url }, ...(p.items || [])])
+      .find(i => i.url === pathname)
 
     if (activeItem) {
       document.title = `Documentação - ${activeItem.title}`
@@ -52,10 +50,14 @@ export function NavDoc({
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarGroupLabel>Documentação</SidebarGroupLabel>
+
       <SidebarMenu>
         {projects.map((project) => {
           const isProjectActive = pathname === project.url
-          const hasActiveSub = project.items?.some((sub) => pathname === sub.url)
+          const hasSubItems = !!project.items?.length
+          const hasActiveSub = project.items?.some(
+            (sub) => pathname === sub.url
+          )
 
           return (
             <Collapsible
@@ -64,57 +66,74 @@ export function NavDoc({
               defaultOpen={project.isActive || hasActiveSub}
             >
               <SidebarMenuItem>
-                <SidebarMenuButton 
-                  asChild 
-                  tooltip={project.name}
-                  isActive={isProjectActive}
-                  className="relative"
-                >
-                  <Link to={project.url} className="flex items-center w-full">
-                    {isProjectActive && (
-                      <div className="absolute left-0 h-4 w-[2px] bg-[#2c2f6e] dark:bg-blue-500" />
-                    )}
-                    <project.icon />
-                    <span>{project.name}</span>
-                  </Link>
-                </SidebarMenuButton>
+                {hasSubItems ? (
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton
+                      tooltip={project.name}
+                      isActive={isProjectActive || hasActiveSub}
+                      className="relative flex items-center w-full"
+                    >
+                      {(isProjectActive || hasActiveSub) && (
+                        <div className="absolute left-0 h-4 w-[2px] bg-[#2c2f6e] dark:bg-blue-500" />
+                      )}
+                      <project.icon className="h-4 w-4" />
+                      <span>{project.name}</span>
+                      <ChevronRight className="ml-auto transition-transform duration-200 data-[state=open]:rotate-90" />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                ) : (
+                  <SidebarMenuButton
+                    asChild
+                    tooltip={project.name}
+                    isActive={isProjectActive}
+                    className="relative"
+                  >
+                    <Link to={project.url} className="flex items-center w-full">
+                      {isProjectActive && (
+                        <div className="absolute left-0 h-4 w-[2px] bg-[#2c2f6e] dark:bg-blue-500" />
+                      )}
+                      <project.icon className="h-4 w-4" />
+                      <span>{project.name}</span>
+                    </Link>
+                  </SidebarMenuButton>
+                )}
 
-                {project.items?.length ? (
-                  <>
-                    <CollapsibleTrigger asChild>
-                      <SidebarMenuAction className="transition-transform duration-200 data-[state=open]:rotate-90">
-                        <ChevronRight />
-                        <span className="sr-only">Toggle</span>
-                      </SidebarMenuAction>
-                    </CollapsibleTrigger>
+                {hasSubItems && (
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {project.items!.map((item) => {
+                        const isSubActive = pathname === item.url
 
-                    <CollapsibleContent>
-                      <SidebarMenuSub>
-                        {project.items.map((item) => {
-                          const isSubActive = pathname === item.url
-                          return (
-                            <SidebarMenuSubItem key={item.title}>
-                              <SidebarMenuSubButton 
-                                asChild
-                                isActive={isSubActive}
-                                className="relative"
+                        return (
+                          <SidebarMenuSubItem key={item.title}>
+                            <SidebarMenuSubButton
+                              asChild
+                              isActive={isSubActive}
+                              className="relative"
+                            >
+                              <Link
+                                to={item.url}
+                                className="flex items-center w-full"
                               >
-                                <Link to={item.url} className="flex items-center w-full">
-                                  {isSubActive && (
-                                    <div className="absolute left-[-13px] h-4 w-[2px] bg-[#2c2f6e] dark:bg-blue-500" />
+                                {isSubActive && (
+                                  <div className="absolute left-[-13px] h-4 w-[2px] bg-[#2c2f6e] dark:bg-blue-500" />
+                                )}
+                                <span
+                                  className={cn(
+                                    isSubActive &&
+                                      "text-[#2c2f6e] dark:text-blue-400 font-medium"
                                   )}
-                                  <span className={cn(isSubActive && "text-[#2c2f6e] dark:text-blue-400 font-medium")}>
-                                    {item.title}
-                                  </span>
-                                </Link>
-                              </SidebarMenuSubButton>
-                            </SidebarMenuSubItem>
-                          )
-                        })}
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
-                  </>
-                ) : null}
+                                >
+                                  {item.title}
+                                </span>
+                              </Link>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        )
+                      })}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                )}
               </SidebarMenuItem>
             </Collapsible>
           )

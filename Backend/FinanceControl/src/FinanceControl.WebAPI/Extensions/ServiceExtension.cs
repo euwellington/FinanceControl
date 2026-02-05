@@ -16,6 +16,7 @@ public static class ServiceExtension
         services.AddScoped<ICategoryService, CategoryService>();
         services.AddScoped<ITransactionService, TransactionService>();
         services.AddScoped<IReportService, ReportService>();
+        services.AddScoped<IDashboardService, DashboardService>();
 
         services.AddScoped<JwtValidation>();
         services.AddHttpContextAccessor();

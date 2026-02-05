@@ -20,7 +20,7 @@ public class PeopleScripts
         INSERT INTO people
             (Id, Name, Age, Email, Password)
         VALUES
-            (@Id, @Name, @Age, @Email, MD5(@Password));
+            (@Id, @Name, @Age, @Email, @Password);
     ";
 
     public const string Update = @"
@@ -29,7 +29,7 @@ public class PeopleScripts
             Name = @Name,
             Age = @Age,
             Email = @Email,
-            Password = MD5(@Password),
+            Password = @Password,
             UpdatedAt = NOW()
         WHERE Id = @Id
           AND DeletedAt IS NULL;

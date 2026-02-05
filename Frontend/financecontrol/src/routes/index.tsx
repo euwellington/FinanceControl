@@ -11,6 +11,15 @@ import ButtonTheme from "@/components/buttontheme";
 import PagePeople from "@/pages/people";
 import PageCategory from "@/pages/category";
 import PageTransaction from "@/pages/transaction";
+import PagePeopleReport from "@/pages/report/people";
+import PageCategoryReport from "@/pages/report/category";
+
+import PageDocBackendOverview from "@/pages/doc/backend/overview";
+import PageDocBackendAuth from "@/pages/doc/backend/auth";
+import PageDocBackendPeople from "@/pages/doc/backend/people";
+import PageDocBackendCategory from "@/pages/doc/backend/category";
+import PageDocBackendTransaction from "@/pages/doc/backend/transaction";
+import PageDocBackendReport from "@/pages/doc/backend/report";
 
 const TOKEN_KEY = "@token";
 
@@ -61,6 +70,21 @@ const RouteLogin = () => {
         <Route path="/pessoas" element={<PagePeople />} />
         <Route path="/categorias" element={<PageCategory />} />
         <Route path="/transacoes" element={<PageTransaction />} />
+
+        {/* Report  */}
+        <Route path="/realtorio" element={<PageTransaction />} />
+        <Route path="/relatorios/pessoas" element={<PagePeopleReport />} />
+        <Route path="/relatorios/categorias" element={<PageCategoryReport />} />
+
+        {/* Doc  */}
+        <Route path="/docs/backend/visao-geral" element={<PageDocBackendOverview />} />
+        <Route path="/docs/backend/autenticacao" element={<PageDocBackendAuth />} />
+        <Route path="/docs/backend/pessoas" element={<PageDocBackendPeople />} />
+        <Route path="/docs/backend/categorias" element={<PageDocBackendCategory />} />
+        <Route path="/docs/backend/transacoes" element={<PageDocBackendTransaction />} />
+        <Route path="/docs/backend/relatorios" element={<PageDocBackendReport />} />
+
+
       </Route>
 
       <Route path="*" element={<NotFound />} />

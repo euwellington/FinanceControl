@@ -63,7 +63,7 @@ public class ReportService : BaseService, IReportService
         }
     }
 
-    public async Task<PagedResponse<PersonTotal>> GetTransactionsCategory(ReportTransactionCategoryModel request)
+    public async Task<PagedResponse<CategoryTotal>> GetTransactionsCategory(ReportTransactionCategoryModel request)
     {
         try
         {

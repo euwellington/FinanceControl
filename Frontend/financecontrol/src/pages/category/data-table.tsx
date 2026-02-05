@@ -23,41 +23,63 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Skeleton } from "@/components/ui/skeleton"
-import { type IPeople } from "@/interfaces/IPeople"
-import { type IPaginated } from "@/interfaces/IPaginated"
+import { Badge } from "@/components/ui/badge"
 import { StoresContext } from "@/stores/inject"
-import UpdatePeople from "@/components/forms/dialog/people/update"
-import RemovePeople from "@/components/forms/dialog/people/remove"
+import { format } from "date-fns"
 
-const columns: ColumnDef<IPeople>[] = [
+export interface ICategory {
+  id: string
+  description: string
+  purpose: "Income" | "Expense"
+  createdAt: Date
+  updatedAt: Date | null
+}
+
+import UpdateCategory from "@/components/forms/dialog/category/update"
+import RemoveCategory from "@/components/forms/dialog/category/remove"
+import type { IPaginated } from "@/interfaces/IPaginated"
+import { cn } from "@/lib/utils"
+
+const columns: ColumnDef<ICategory>[] = [
   {
-    accessorKey: "name",
-    header: "Nome",
+    accessorKey: "description",
+    header: "Descrição",
+    cell: ({ row }) => <span className="font-medium">{row.original.description}</span>,
+  },
+  {
+    accessorKey: "purpose",
+    header: "Tipo",
     cell: ({ row }) => {
-      const { jwtStore } = React.useContext(StoresContext)
-
-      return <span className="font-medium">{row.original.name} {jwtStore.decoded?.Id === row.original.id ? `(Você)` : ''}</span>
+      const isIncome = row.original.purpose === "Income"
+      return (
+        <Badge
+          className={cn(
+            "font-semibold",
+            isIncome
+              ? "bg-emerald-100 text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-500/20 dark:text-emerald-400"
+              : "bg-rose-100 text-rose-700 hover:bg-rose-100 dark:bg-rose-500/20 dark:text-rose-400"
+          )}
+          variant="outline"
+        >
+          {isIncome ? "Receita" : "Despesa"}
+        </Badge>
+      )
     },
   },
   {
-    accessorKey: "age",
-    header: "Idade",
-    cell: ({ row }) => row.original.age,
-  },
-  {
-    accessorKey: "email",
-    header: "E-mail",
-    cell: ({ row }) => row.original.email,
+    accessorKey: "createdAt",
+    header: "Criado em",
+    cell: ({ row }) => format(new Date(row.original.createdAt), "dd/MM/yyyy HH:mm"),
   },
   {
     id: "actions",
     header: "Ações",
     cell: ({ row }) => {
-      const { peopleStore } = React.useContext(StoresContext)
+      const { categoryStore } = React.useContext(StoresContext)
       return (
-        <div onClick={() => peopleStore.setSelected(row.original.id)}>
-          <UpdatePeople />
-          <RemovePeople item={row.original} />
+        <div onClick={() => categoryStore.setSelected(row.original.id)} className="flex gap-2">
+          <UpdateCategory />
+          <RemoveCategory item={row.original} />
         </div>
       )
     },
@@ -81,13 +103,13 @@ function generatePageNumbers(current: number, total: number): (number | string)[
 }
 
 interface DataTableProps {
-  data: IPaginated<IPeople>
+  data: IPaginated<ICategory>
 }
 
-const DataTable = ({ data }: DataTableProps) => {
-  const { peopleStore } = React.useContext(StoresContext)
+const CategoryDataTable = ({ data }: DataTableProps) => {
+  const { categoryStore } = React.useContext(StoresContext)
 
-  const plainData = React.useMemo<IPeople[]>(
+  const plainData = React.useMemo<ICategory[]>(
     () => toJS(data.data) ?? [],
     [data.data]
   )
@@ -100,7 +122,7 @@ const DataTable = ({ data }: DataTableProps) => {
     setPageSize(data.pageSize)
   }, [data.page, data.pageSize])
 
-  const table = useReactTable<IPeople>({
+  const table = useReactTable<ICategory>({
     data: plainData,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -109,7 +131,7 @@ const DataTable = ({ data }: DataTableProps) => {
   const totalPages: number = data.totalPages
 
   const fetchData = (pageParam: number, pageSizeParam: number): void => {
-    peopleStore.getAll({
+    categoryStore.getAll({
       page: pageParam,
       pageSize: pageSizeParam
     })
@@ -136,7 +158,7 @@ const DataTable = ({ data }: DataTableProps) => {
         <div className="overflow-hidden rounded-lg border border-gray-300 bg-white dark:bg-gray-900 dark:border-gray-700">
           <div className="p-6 flex flex-wrap items-center justify-between gap-6 rounded-t-lg bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
             <div className="flex flex-col">
-              <CardTitle className="text-gray-900 dark:text-gray-100 text-sm font-semibold">Pessoas</CardTitle>
+              <CardTitle className="text-gray-900 dark:text-gray-100 text-sm font-semibold">Categorias</CardTitle>
               <CardDescription className="text-xs">
                 Total de {data.totalRecords} registros encontrados.
               </CardDescription>
@@ -172,7 +194,7 @@ const DataTable = ({ data }: DataTableProps) => {
               ))}
             </TableHeader>
             <TableBody>
-              {peopleStore.loading ? (
+              {categoryStore.loading ? (
                 Array.from({ length: pageSize }).map((_, i) => (
                   <TableRow key={i}>
                     {columns.map((_, j) => (
@@ -185,7 +207,7 @@ const DataTable = ({ data }: DataTableProps) => {
               ) : table.getRowModel().rows.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={columns.length} className="h-24 text-center">
-                    Nenhum registro encontrado.
+                    Nenhuma categoria encontrada.
                   </TableCell>
                 </TableRow>
               ) : (
@@ -211,7 +233,7 @@ const DataTable = ({ data }: DataTableProps) => {
                 variant="outline"
                 size="sm"
                 onClick={() => handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1 || peopleStore.loading}
+                disabled={currentPage === 1 || categoryStore.loading}
               >
                 Anterior
               </Button>
@@ -223,7 +245,7 @@ const DataTable = ({ data }: DataTableProps) => {
                     key={index}
                     variant={currentPage === page ? "default" : "outline"}
                     size="sm"
-                    disabled={peopleStore.loading}
+                    disabled={categoryStore.loading}
                     onClick={() => handlePageChange(Number(page))}
                   >
                     {page}
@@ -234,7 +256,7 @@ const DataTable = ({ data }: DataTableProps) => {
                 variant="outline"
                 size="sm"
                 onClick={() => handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages || peopleStore.loading}
+                disabled={currentPage === totalPages || categoryStore.loading}
               >
                 Próximo
               </Button>
@@ -246,4 +268,4 @@ const DataTable = ({ data }: DataTableProps) => {
   )
 }
 
-export default observer(DataTable)
+export default observer(CategoryDataTable)

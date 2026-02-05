@@ -14,6 +14,7 @@ public static class RepositoryExtension
         services.AddScoped<ICategoryRepository, CategoryRepository>();
         services.AddScoped<ITransactionRepository, TransactionRepository>();
         services.AddScoped<IReportRepository, ReportRepository>();
+        services.AddScoped<IDashboardRepository, DashboardRepository>();
 
         services.AddScoped<InitializeDB>();
 

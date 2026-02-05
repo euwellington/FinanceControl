@@ -13,6 +13,7 @@ import {
   Lock,
   UserPlus,
   LayoutDashboard,
+  Dock,
 } from "lucide-react"
 
 import { NavMain } from "@/components/layout/nav-main"
@@ -64,12 +65,12 @@ const data = {
       icon: BarChart3,
       items: [
         {
-          title: "Por Pessoas",
+          title: "Pessoas/Transações",
           url: "/relatorios/pessoas",
           icon: UserCheck,
         },
         {
-          title: "Por Categorias",
+          title: "Categorias/Transações",
           url: "/relatorios/categorias",
           icon: Tags,
         },
@@ -82,6 +83,11 @@ const data = {
       url: "#",
       icon: Server,
       items: [
+        {
+          title: "Visão Geral",
+          url: "/docs/backend/visao-geral",
+          icon: Dock,
+        },
         {
           title: "Autenticação",
           url: "/docs/backend/autenticacao",
@@ -102,6 +108,11 @@ const data = {
           url: "/docs/backend/transacoes",
           icon: ArrowLeftRight,
         },
+          {
+          title: "Relatórios",
+          url: "/docs/backend/relatorios",
+          icon: ArrowLeftRight,
+        },
       ],
     },
     {
@@ -109,6 +120,11 @@ const data = {
       url: "#",
       icon: Monitor,
       items: [
+        {
+          title: "Visão Geral",
+          url: "/docs/frontend/visao-geral",
+          icon: Dock,
+        },
         {
           title: "Login",
           url: "/docs/frontend/login",
@@ -137,6 +153,11 @@ const data = {
         {
           title: "Transações",
           url: "/docs/frontend/transacoes",
+          icon: ArrowLeftRight,
+        },
+         {
+          title: "Relatórios",
+          url: "/docs/frontend/report",
           icon: ArrowLeftRight,
         },
       ],

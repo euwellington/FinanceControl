@@ -5,18 +5,30 @@ namespace FinanceControl.Repositories.Scripts;
 public class TransactionScripts
 {
     public const string SelectBase = @"
-        SELECT
+       SELECT 
             t.Id,
             t.CategoryId,
             t.PersonId,
             t.Description,
+            p.Name AS PeopleName,
+            p.Age AS PeopleAge,
+            c.Description AS DescriptionCategory,
+            t.Type AS TypeCategory,
             t.Amount,
-            t.TypeString,
+            t.Type,
             t.CreatedAt,
             t.UpdatedAt
-        FROM transactions t
-        WHERE t.DeletedAt IS NULL
-    ";
+        FROM
+            transactions t
+                INNER JOIN
+            categories c ON c.Id = t.CategoryId
+                INNER JOIN
+            people p ON p.Id = t.PersonId
+        WHERE
+            t.DeletedAt IS NULL
+                AND p.DeletedAt IS NULL
+                AND c.DeletedAt IS NULL
+            ";
 
     public const string Insert = @"
         INSERT INTO transactions
