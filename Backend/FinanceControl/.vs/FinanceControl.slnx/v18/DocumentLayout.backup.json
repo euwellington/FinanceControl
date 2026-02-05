@@ -3,20 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F90AF05E-6DE8-4E69-B84D-B473E9E850B1}|src\\FinanceControl.Services\\FinanceControl.Services.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.services\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F90AF05E-6DE8-4E69-B84D-B473E9E850B1}|src\\FinanceControl.Services\\FinanceControl.Services.csproj|solutionrelative:src\\financecontrol.services\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A1B5339C-9A97-45E4-A930-F557BBDA67E9}|src\\FinanceControl.Tests\\FinanceControl.Tests.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.tests\\cateogytests\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1B5339C-9A97-45E4-A930-F557BBDA67E9}|src\\FinanceControl.Tests\\FinanceControl.Tests.csproj|solutionrelative:src\\financecontrol.tests\\cateogytests\\categoryservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F5D2D343-57BA-488B-AF5D-3A20625DB3F4}|src\\FinanceControl.WebAPI\\FinanceControl.WebAPI.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.webapi\\extensions\\databaseextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5D2D343-57BA-488B-AF5D-3A20625DB3F4}|src\\FinanceControl.WebAPI\\FinanceControl.WebAPI.csproj|solutionrelative:src\\financecontrol.webapi\\extensions\\databaseextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A1B5339C-9A97-45E4-A930-F557BBDA67E9}|src\\FinanceControl.Tests\\FinanceControl.Tests.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.tests\\peopletests\\peopleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1B5339C-9A97-45E4-A930-F557BBDA67E9}|src\\FinanceControl.Tests\\FinanceControl.Tests.csproj|solutionrelative:src\\financecontrol.tests\\peopletests\\peopleservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F5D2D343-57BA-488B-AF5D-3A20625DB3F4}|src\\FinanceControl.WebAPI\\FinanceControl.WebAPI.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.webapi\\extensions\\repositoryextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5D2D343-57BA-488B-AF5D-3A20625DB3F4}|src\\FinanceControl.WebAPI\\FinanceControl.WebAPI.csproj|solutionrelative:src\\financecontrol.webapi\\extensions\\repositoryextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A1B5339C-9A97-45E4-A930-F557BBDA67E9}|src\\FinanceControl.Tests\\FinanceControl.Tests.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.tests\\transactiontest\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A1B5339C-9A97-45E4-A930-F557BBDA67E9}|src\\FinanceControl.Tests\\FinanceControl.Tests.csproj|solutionrelative:src\\financecontrol.tests\\transactiontest\\transactionservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F5D2D343-57BA-488B-AF5D-3A20625DB3F4}|src\\FinanceControl.WebAPI\\FinanceControl.WebAPI.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.webapi\\extensions\\contextextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5D2D343-57BA-488B-AF5D-3A20625DB3F4}|src\\FinanceControl.WebAPI\\FinanceControl.WebAPI.csproj|solutionrelative:src\\financecontrol.webapi\\extensions\\contextextension.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A1B5339C-9A97-45E4-A930-F557BBDA67E9}|src\\FinanceControl.Tests\\FinanceControl.Tests.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.tests\\financecontrol.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A1B5339C-9A97-45E4-A930-F557BBDA67E9}|src\\FinanceControl.Tests\\FinanceControl.Tests.csproj|solutionrelative:src\\financecontrol.tests\\financecontrol.tests.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,58 +26,62 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 4,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TransactionService.cs",
-              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Services\\TransactionService.cs",
-              "RelativeDocumentMoniker": "src\\FinanceControl.Services\\TransactionService.cs",
-              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Services\\TransactionService.cs",
-              "RelativeToolTip": "src\\FinanceControl.Services\\TransactionService.cs",
-              "ViewState": "AgIAAEwAAAAAAAAAAAAiwE8AAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T16:26:16.273Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DatabaseExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.WebAPI\\Extensions\\DatabaseExtensions.cs",
-              "RelativeDocumentMoniker": "src\\FinanceControl.WebAPI\\Extensions\\DatabaseExtensions.cs",
-              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.WebAPI\\Extensions\\DatabaseExtensions.cs",
-              "RelativeToolTip": "src\\FinanceControl.WebAPI\\Extensions\\DatabaseExtensions.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAADwvxMAAACGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T16:24:46.048Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "RepositoryExtensions.cs",
-              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.WebAPI\\Extensions\\RepositoryExtensions.cs",
-              "RelativeDocumentMoniker": "src\\FinanceControl.WebAPI\\Extensions\\RepositoryExtensions.cs",
-              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.WebAPI\\Extensions\\RepositoryExtensions.cs",
-              "RelativeToolTip": "src\\FinanceControl.WebAPI\\Extensions\\RepositoryExtensions.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAswBcAAAABAAAAAAAAAA==",
+              "Title": "TransactionService.cs",
+              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Tests\\TransactionTest\\TransactionService.cs",
+              "RelativeDocumentMoniker": "src\\FinanceControl.Tests\\TransactionTest\\TransactionService.cs",
+              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Tests\\TransactionTest\\TransactionService.cs",
+              "RelativeToolTip": "src\\FinanceControl.Tests\\TransactionTest\\TransactionService.cs",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAswJEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T16:24:41.208Z",
+              "WhenOpened": "2026-02-05T19:59:37.505Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ContextExtension.cs",
-              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.WebAPI\\Extensions\\ContextExtension.cs",
-              "RelativeDocumentMoniker": "src\\FinanceControl.WebAPI\\Extensions\\ContextExtension.cs",
-              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.WebAPI\\Extensions\\ContextExtension.cs",
-              "RelativeToolTip": "src\\FinanceControl.WebAPI\\Extensions\\ContextExtension.cs",
-              "ViewState": "AgIAAF0AAAAAAAAAAADwv24AAAAAAAAAAAAAAA==",
+              "Title": "FinanceControl.Tests",
+              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Tests\\FinanceControl.Tests.csproj",
+              "RelativeDocumentMoniker": "src\\FinanceControl.Tests\\FinanceControl.Tests.csproj",
+              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Tests\\FinanceControl.Tests.csproj",
+              "RelativeToolTip": "src\\FinanceControl.Tests\\FinanceControl.Tests.csproj",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAowBEAAABIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-02-05T19:53:43.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PeopleService.cs",
+              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Tests\\PeopleTests\\PeopleService.cs",
+              "RelativeDocumentMoniker": "src\\FinanceControl.Tests\\PeopleTests\\PeopleService.cs",
+              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Tests\\PeopleTests\\PeopleService.cs",
+              "RelativeToolTip": "src\\FinanceControl.Tests\\PeopleTests\\PeopleService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T15:41:39.621Z",
+              "WhenOpened": "2026-02-05T19:45:46.836Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CategoryService.cs",
+              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Tests\\CateogyTests\\CategoryService.cs",
+              "RelativeDocumentMoniker": "src\\FinanceControl.Tests\\CateogyTests\\CategoryService.cs",
+              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Tests\\CateogyTests\\CategoryService.cs",
+              "RelativeToolTip": "src\\FinanceControl.Tests\\CateogyTests\\CategoryService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-02-05T19:41:41.036Z",
               "EditorCaption": ""
             }
           ]
