@@ -77,6 +77,9 @@ public class TransactionService : BaseService, ITransactionService
             var validation = await ExecuteValidationAsync(new TransactionValidation(_peopleRepository, _categoryRepository, false), request);
             if (validation.Error) return validation;
 
+            // Buscamos os dados necessários PRIMEIRO para evitar concorrência no socket do MySQL
+            var person = await _peopleRepository.GetById(request.PersonId);
+            var category = await _categoryRepository.GetById(request.CategoryId);
 
             // Dispara a notificação via Hub em paralelo, sem travar o fluxo
             _ = Task.Run(async () =>
@@ -87,8 +90,8 @@ public class TransactionService : BaseService, ITransactionService
                     var hubData = new HubTransaction
                     {
                         Transaction = request,
-                        People = await _peopleRepository.GetById(request.PersonId), // pega a pessoa
-                        Category = await _categoryRepository.GetById(request.CategoryId) // pega a categoria
+                        People = person, // pega a pessoa
+                        Category = category // pega a categoria
                     };
 
                     // Envia para todos os clientes conectados
@@ -125,6 +128,10 @@ public class TransactionService : BaseService, ITransactionService
             var update = await _transactionRepository.Update(request);
             if (update.Error) return update;
 
+            // Buscamos os dados necessários PRIMEIRO para evitar concorrência no socket do MySQL
+            var person = await _peopleRepository.GetById(request.PersonId);
+            var category = await _categoryRepository.GetById(request.CategoryId);
+
             // Dispara a notificação via Hub em paralelo, sem travar o fluxo
             _ = Task.Run(async () =>
             {
@@ -134,8 +141,8 @@ public class TransactionService : BaseService, ITransactionService
                     var hubData = new HubTransaction
                     {
                         Transaction = request,
-                        People = await _peopleRepository.GetById(request.PersonId), // pega a pessoa
-                        Category = await _categoryRepository.GetById(request.CategoryId) // pega a categoria
+                        People = person, // pega a pessoa
+                        Category = category // pega a categoria
                     };
 
                     // Envia para todos os clientes conectados

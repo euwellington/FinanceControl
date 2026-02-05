@@ -15,6 +15,7 @@ public static class RepositoryExtension
         services.AddScoped<ITransactionRepository, TransactionRepository>();
         services.AddScoped<IReportRepository, ReportRepository>();
         services.AddScoped<IDashboardRepository, DashboardRepository>();
+        services.AddScoped<ICrudLoggerRepository, CrudLoggerRepository>();
 
         services.AddScoped<InitializeDB>();
 

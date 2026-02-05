@@ -1,22 +1,23 @@
 ﻿using FinanceControl.Models.Entities;
 using FinanceControl.Models.Enums;
-using FinanceControl.Repositories.Base;
 using FinanceControl.Repositories.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using MySql.Data.MySqlClient;
 using System.Text.Json;
 using MongoDB.Driver;
 using FinanceControl.Models.DataBase;
 
 namespace FinanceControl.Repositories;
 
-public class CrudLoggerRepository : BaseRepository, ICrudLoggerRepository
+public class CrudLoggerRepository : ICrudLoggerRepository
 {
     private readonly IMongoCollection<CrudLog> _logs;
+    private readonly ILogger<CrudLoggerRepository> _logger;
 
-    public CrudLoggerRepository(MySqlConnection mySqlConnection, ILogger<CrudLoggerRepository> logger, MongoDbSettings dataBaseSettings, IHttpContextAccessor httpContextAccessor) : base(mySqlConnection, logger, httpContextAccessor)
+    public CrudLoggerRepository(
+        ILogger<CrudLoggerRepository> logger,
+        MongoDbSettings dataBaseSettings)
     {
+        _logger = logger;
         var client = new MongoClient(dataBaseSettings.ConnectionString);
         var dataBase = client.GetDatabase(dataBaseSettings.DatabaseName);
         _logs = dataBase.GetCollection<CrudLog>(dataBaseSettings.CollectionLogs);
@@ -29,22 +30,29 @@ public class CrudLoggerRepository : BaseRepository, ICrudLoggerRepository
         string userId,
         string userName)
     {
-        var options = new JsonSerializerOptions
+        try
         {
-            WriteIndented = false, // sem indentação extra
-            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
-        };
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = false,
+                Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+            };
 
-        var log = new CrudLog
+            var log = new CrudLog
+            {
+                Action = action,
+                EntityName = entity.GetType().Name,
+                EntityId = entityId,
+                EntityData = JsonSerializer.Serialize(entity, options),
+                UserId = userId,
+                UserName = userName
+            };
+
+            await _logs.InsertOneAsync(log);
+        }
+        catch (Exception ex)
         {
-            Action = action,
-            EntityName = entity.GetType().Name,
-            EntityId = entityId,
-            EntityData = JsonSerializer.Serialize(entity, options),
-            UserId = userId,
-            UserName = userName
-        };
-
-        await _logs.InsertOneAsync(log);
+            _logger.LogError(ex, "Erro ao salvar log no MongoDB para a entidade {Entity}", entity.GetType().Name);
+        }
     }
 }

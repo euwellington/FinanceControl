@@ -28,8 +28,6 @@ import { type ITransaction } from "@/interfaces/ITransaction"
 import { type IPaginated } from "@/interfaces/IPaginated"
 import { StoresContext } from "@/stores/inject"
 import { cn } from "@/lib/utils"
-import UpdateTransaction from "@/components/forms/dialog/transaction/update"
-import RemoveTransaction from "@/components/forms/dialog/transaction/remove"
 
 const columns: ColumnDef<ITransaction>[] = [
   {
@@ -106,20 +104,7 @@ const columns: ColumnDef<ITransaction>[] = [
         <span className="text-[10px] text-muted-foreground">{row.original.peopleAge} anos</span>
       </div>
     ),
-  },
-  {
-    id: "actions",
-    header: "Ações",
-    cell: ({ row }) => {
-      const { transactionStore } = React.useContext(StoresContext)
-      return (
-        <div className="flex items-center" onClick={() => transactionStore.setSelected(row.original.id)}>
-          <UpdateTransaction />
-          <RemoveTransaction item={row.original} />
-        </div>
-      )
-    },
-  },
+  }
 ]
 
 function generatePageNumbers(current: number, total: number): (number | string)[] {

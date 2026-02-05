@@ -50,15 +50,10 @@ public class TransactionRepository : BaseRepository, ITransactionRepository
             if (request.CreatedAt != DateTime.MinValue)
                 AddFilter(sqlBase, parameters, request.CreatedAt, "AND DATE(t.CreatedAt) = DATE(@CreatedAt)", "CreatedAt");
 
-            // Correção do Count: Garantir que a subquery seja uma string válida e limpa
-            var countSql = $"SELECT COUNT(1) FROM ({sqlBase.ToString()}) AS Total";
+            var countSql = $"SELECT COUNT(1) FROM ({sqlBase}) AS Total";
 
-            if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
-                await _mySqlConnection.OpenAsync();
+            var totalRecords = await GetOneAsync<int>(countSql, parameters);
 
-            var totalRecords = await _mySqlConnection.ExecuteScalarAsync<int>(countSql, parameters);
-
-            // Agora adicionamos a ordenação e paginação apenas para a query de dados
             var sqlData = new StringBuilder(sqlBase.ToString());
             var offset = (request.Page - 1) * request.PageSize;
 
@@ -68,7 +63,8 @@ public class TransactionRepository : BaseRepository, ITransactionRepository
             parameters.Add("PageSize", request.PageSize);
             parameters.Add("Offset", offset);
 
-            var transactions = (await _mySqlConnection.QueryAsync<Transaction>(sqlData.ToString(), parameters)).ToList();
+            // Usando o GetListAsync da base
+            var transactions = (await GetListAsync<Transaction>(sqlData.ToString(), parameters)).ToList();
 
             return new PagedResponse<Transaction>().ResponseSuccess(
                 "List loaded successfully",
@@ -83,7 +79,7 @@ public class TransactionRepository : BaseRepository, ITransactionRepository
             _logger.LogError(ex, "Error in GetAll transactions");
             throw;
         }
-    }   
+    }
 
     public async Task<Transaction> GetById(Guid id)
     {

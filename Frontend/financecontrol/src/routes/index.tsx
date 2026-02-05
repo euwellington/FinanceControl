@@ -14,6 +14,8 @@ import PageTransaction from "@/pages/transaction";
 import PagePeopleReport from "@/pages/report/people";
 import PageCategoryReport from "@/pages/report/category";
 
+import PageHubTransaction from "@/pages/hubtransaction";
+
 import PageDocBackendOverview from "@/pages/doc/backend/overview";
 import PageDocBackendAuth from "@/pages/doc/backend/auth";
 import PageDocBackendDashboard from "@/pages/doc/backend/dashboard";
@@ -74,6 +76,7 @@ const RouteLogin = () => {
     <Routes>
       <Route path="/" element={
         <PublicRoute>
+          <ButtonTheme />
           <LoginPage />
         </PublicRoute>
       } />
@@ -88,6 +91,10 @@ const RouteLogin = () => {
         <Route path="/realtorio" element={<PageTransaction />} />
         <Route path="/relatorios/pessoas" element={<PagePeopleReport />} />
         <Route path="/relatorios/categorias" element={<PageCategoryReport />} />
+
+        {/* Hub */}
+        <Route path="/hub/transacoes" element={<SidebarLayout><PageHubTransaction /></SidebarLayout>} />
+
 
         {/* Doc */}
         <Route path="/docs/backend/visao-geral" element={<SidebarLayout><PageDocBackendOverview /></SidebarLayout>} />

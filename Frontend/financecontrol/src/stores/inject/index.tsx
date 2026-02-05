@@ -6,6 +6,7 @@ import CategoryStore from '../CategoryStore';
 import TransactionStore from '../TransactionStore';
 import DashboardStore from '../DashboardStore';
 import ReportStore from '../ReportStore';
+import HubConnectionStore from '../HubConnectionStore';
 
 export const StoresContext = createContext({
   themeStore: new ThemeStore(),
@@ -14,5 +15,6 @@ export const StoresContext = createContext({
   transactionStore: new TransactionStore(),
   dashboardStore: new DashboardStore(),
   reportStore: new ReportStore(),
+  hubConnectionStore: new HubConnectionStore(),
   peopleStore: new PeopleStore()
 });

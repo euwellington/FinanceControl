@@ -13,6 +13,7 @@ import {
   Lock,
   LayoutDashboard,
   Dock,
+  Fingerprint,
 } from "lucide-react"
 
 import { NavMain } from "@/components/layoutmain/nav-main"
@@ -33,6 +34,12 @@ const data = {
       title: "Dashboard",
       url: "/dashboard",
       icon: LayoutDashboard,
+      isActive: false,
+    },
+       {
+      title: "Transações RealTime",
+      url: "/hub/transacoes",
+      icon: Fingerprint,
       isActive: false,
     },
     {

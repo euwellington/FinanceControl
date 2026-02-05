@@ -1,6 +1,7 @@
 using FinanceControl.Models.DataBase;
 using FinanceControl.Repositories;
 using FinanceControl.Repositories.Base;
+using FinanceControl.Repositories.Interfaces;
 using FinanceControl.WebAPI.Extensions;
 using MySql.Data.MySqlClient;
 
@@ -21,13 +22,11 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var provider = scope.ServiceProvider;
-    var mySqlConnection = provider.GetRequiredService<MySqlConnection>();
-    var logger = provider.GetRequiredService<ILogger<CrudLoggerRepository>>();
-    var httpContextAccessor = provider.GetRequiredService<IHttpContextAccessor>();
-    var dataBaseSettings = provider.GetRequiredService<MongoDbSettings>();
 
-    var crudLogger = new CrudLoggerRepository(mySqlConnection, logger, dataBaseSettings, httpContextAccessor);
+    var crudLogger = provider.GetRequiredService<ICrudLoggerRepository>();
     BaseRepository.ConfigureCrudLogger(crudLogger);
+
+    var dbInitializer = provider.GetRequiredService<InitializeDB>();
 }
 
 // Inicializa o banco

@@ -9,8 +9,7 @@ using System.Text;
 
 namespace FinanceControl.Repositories.Base;
 
-// Removido o IDisposable daqui
-public abstract class BaseRepository
+public abstract class BaseRepository : IDisposable
 {
     public readonly MySqlConnection _mySqlConnection;
     private HttpContext? _context;
@@ -27,6 +26,14 @@ public abstract class BaseRepository
     public static void ConfigureCrudLogger(ICrudLoggerRepository logger)
     {
         _crudLoggerRepositoryStatic = logger;
+    }
+
+    private async Task EnsureOpenConnectionAsync()
+    {
+        if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
+        {
+            await _mySqlConnection.OpenAsync();
+        }
     }
 
     protected Guid GetUserId()
@@ -59,10 +66,10 @@ public abstract class BaseRepository
 
     protected async Task<bool> ExecuteAsync(string sql, object parameters, CrudAction? action = null)
     {
+        await EnsureOpenConnectionAsync();
+
         try
         {
-            // O Dapper abre e fecha a conexão automaticamente se ela estiver fechada.
-            // Ao remover o OpenAsync manual, evitamos o travamento (Connection Leak).
             var result = await _mySqlConnection.ExecuteAsync(sql, parameters) > 0;
 
             if (result && parameters != null && action.HasValue && _crudLoggerRepositoryStatic != null)
@@ -74,57 +81,56 @@ public abstract class BaseRepository
                 var idValue = idProperty?.GetValue(parameters)?.ToString() ?? "";
 
                 await _crudLoggerRepositoryStatic.LogAsync(action.Value, parameters,
-                    idValue, userId.ToString(), userName);
+                        idValue, userId.ToString(), userName);
             }
-
             return result;
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Erro ao executar query");
+            LogError(ex, "ExecuteAsync", sql, parameters);
             throw;
         }
     }
 
     protected async Task<T> GetOneAsync<T>(string sql, object filters)
     {
+        await EnsureOpenConnectionAsync();
         try
         {
             return await _mySqlConnection.QueryFirstOrDefaultAsync<T>(sql, filters);
         }
         catch (Exception e)
         {
-            throw new Exception($"Error executing SQL: {e.Message}", e);
+            LogError(e, "GetOneAsync", sql, filters);
+            throw;
         }
     }
 
     protected async Task<IEnumerable<T>> GetListAsync<T>(string sql, object? filters)
     {
+        await EnsureOpenConnectionAsync();
         try
         {
-            if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
-                await _mySqlConnection.OpenAsync();
-
             return await _mySqlConnection.QueryAsync<T>(sql, filters);
         }
-        catch
+        catch (Exception ex)
         {
+            LogError(ex, "GetListAsync", sql, filters);
             throw;
         }
     }
 
-    protected bool AlreadyExists(string sql, object filters)
+    protected async Task<bool> AlreadyExistsAsync(string sql, object filters)
     {
+        await EnsureOpenConnectionAsync();
         try
         {
-            if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
-                _mySqlConnection.Open();
-
-            return _mySqlConnection.QueryFirstOrDefault<int>(sql, filters) > 0;
+            var result = await _mySqlConnection.QueryFirstOrDefaultAsync<int>(sql, filters);
+            return result > 0;
         }
         catch (Exception ex)
         {
-            LogError(ex, "Erro ao verificar a existência", sql, filters);
+            LogError(ex, "AlreadyExistsAsync", sql, filters);
             throw;
         }
     }
@@ -136,11 +142,9 @@ public abstract class BaseRepository
         string splitOn = "Id"
     ) where TResult : class
     {
+        await EnsureOpenConnectionAsync();
         try
         {
-            if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
-                await _mySqlConnection.OpenAsync();
-
             return await _mySqlConnection.QueryAsync<TResult, T1, T2, T3, T4, T5, T6, TResult>(
                 sql,
                 (result, t1, t2, t3, t4, t5, t6) => map(result, t1, t2, t3, t4, t5, t6),
@@ -150,7 +154,7 @@ public abstract class BaseRepository
         }
         catch (Exception e)
         {
-            _logger.LogError(e.Message);
+            LogError(e, "GetMultiListAsync", sql, filtros);
             throw;
         }
     }
@@ -204,4 +208,13 @@ public abstract class BaseRepository
     }
 
     private static string GetError(Exception exception) => exception.InnerException is not null ? exception.InnerException.Message : exception.Message;
+
+    public void Dispose()
+    {
+        if (_mySqlConnection != null && _mySqlConnection.State != System.Data.ConnectionState.Closed)
+        {
+            _mySqlConnection.Close();
+        }
+        _mySqlConnection?.Dispose();
+    }
 }

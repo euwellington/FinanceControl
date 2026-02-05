@@ -18,9 +18,8 @@ class TransactionStore {
         try {
             const { data, status } = await TransactionAPI.getAll(params);
             runInAction(() => {
-                if (status === 200) {
-                    this.transactions = data ?? null;
-                }
+                if (status === 200) this.transactions = data ?? null;
+                else this.transactions = data ?? null;
             });
         }
         catch (e) {
