@@ -11,15 +11,14 @@ import {
   Server,
   Monitor,
   Lock,
-  UserPlus,
   LayoutDashboard,
   Dock,
 } from "lucide-react"
 
-import { NavMain } from "@/components/layout/nav-main"
-import { NavDoc } from "@/components/layout/nav-doc"
-import NavUser from "@/components/layout/nav-user"
-import { ProjectHeader } from "@/components/layout/project-header"
+import { NavMain } from "@/components/layoutmain/nav-main"
+import { NavDoc } from "@/components/layoutmain/nav-doc"
+import NavUser from "@/components/layoutmain/nav-user"
+import { ProjectHeader } from "@/components/layoutmain/project-header"
 import {
   Sidebar,
   SidebarContent,
@@ -32,9 +31,9 @@ const data = {
   navMain: [
     {
       title: "Dashboard",
-      url: "/dashboard", 
+      url: "/dashboard",
       icon: LayoutDashboard,
-      isActive: false, 
+      isActive: false,
     },
     {
       title: "Cadastros",
@@ -94,6 +93,11 @@ const data = {
           icon: Lock,
         },
         {
+          title: "Dashboard",
+          url: "/docs/backend/dashboard",
+          icon: Lock,
+        },
+        {
           title: "Cadastro de Pessoas",
           url: "/docs/backend/pessoas",
           icon: Users,
@@ -108,7 +112,7 @@ const data = {
           url: "/docs/backend/transacoes",
           icon: ArrowLeftRight,
         },
-          {
+        {
           title: "Relatórios",
           url: "/docs/backend/relatorios",
           icon: ArrowLeftRight,
@@ -126,18 +130,13 @@ const data = {
           icon: Dock,
         },
         {
-          title: "Login",
-          url: "/docs/frontend/login",
+          title: "Autenticação",
+          url: "/docs/frontend/autenticacao",
           icon: Lock,
         },
         {
-          title: "Primeiro Acesso",
-          url: "/docs/frontend/primeiro-acesso",
-          icon: UserPlus,
-        },
-        {
-          title: "Autenticação",
-          url: "/docs/frontend/autenticacao",
+          title: "Dashboard",
+          url: "/docs/frontend/dashboard",
           icon: Lock,
         },
         {
@@ -155,9 +154,9 @@ const data = {
           url: "/docs/frontend/transacoes",
           icon: ArrowLeftRight,
         },
-         {
+        {
           title: "Relatórios",
-          url: "/docs/frontend/report",
+          url: "/docs/frontend/relatorios",
           icon: ArrowLeftRight,
         },
       ],

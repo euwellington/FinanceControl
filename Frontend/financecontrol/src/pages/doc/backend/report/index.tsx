@@ -1,6 +1,5 @@
 "use client"
 
-import SidebarLayout from "@/components/layout"
 import {
   Card,
   CardContent,
@@ -30,10 +29,10 @@ import {
 
 const DocBackendReport = () => {
   return (
-    <SidebarLayout>
-      <div className="max-w-6xl flex flex-col gap-16 pb-20">
+    <div>
+      <div className="flex flex-col gap-16 max-w-6xl pb-24 mx-auto px-4">
 
-        <div className="space-y-6">
+        <div className="space-y-6 pt-8 text-center md:text-left">
           <div className="flex items-center gap-2">
             <Badge variant="secondary" className="px-3 py-1 text-xs font-semibold uppercase tracking-wider">
               Análise de Dados
@@ -379,7 +378,7 @@ const DocBackendReport = () => {
         </section>
 
       </div>
-    </SidebarLayout>
+    </div>
   )
 }
 

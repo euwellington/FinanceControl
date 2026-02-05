@@ -1,20 +1,17 @@
 "use client"
 
-import SidebarLayout from "@/components/layout"
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardFooter
+  CardDescription
 } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import {
   KeyRound,
   UserPlus,
-  Database,
   Code2,
   Lock,
   ShieldCheck,
@@ -29,10 +26,10 @@ import {
 
 const DocBackendAuth = () => {
   return (
-    <SidebarLayout>
-      <div className="flex flex-col gap-14 max-w-6xl pb-20">
+    <div>
+      <div className="flex flex-col gap-16 max-w-6xl pb-24 mx-auto px-4">
 
-        <div className="space-y-6">
+        <div className="space-y-6 pt-8 text-center md:text-left">
           <div className="flex items-center gap-2">
             <Badge variant="secondary" className="px-3 py-1 text-xs font-semibold uppercase tracking-wider">
               Segurança
@@ -369,7 +366,7 @@ public async Task<IActionResult> FirstRegister([FromBody] PeopleRequest request)
           </div>
         </section>
       </div>
-    </SidebarLayout>
+    </div>
   )
 }
 

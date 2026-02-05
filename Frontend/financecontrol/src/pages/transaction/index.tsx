@@ -1,7 +1,7 @@
 "use client"
 
 import { observer } from 'mobx-react-lite'
-import SidebarLayout from "@/components/layout"
+import SidebarLayout from "@/components/layoutmain"
 import { useContext, useEffect, useMemo } from 'react'
 import { StoresContext } from '@/stores/inject'
 import DataTable from './data-table'

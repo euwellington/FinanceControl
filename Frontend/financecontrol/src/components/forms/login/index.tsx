@@ -50,6 +50,7 @@ const LoginForm = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    e.stopPropagation();
     const validationErrors = LoginValidation(request)
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors)

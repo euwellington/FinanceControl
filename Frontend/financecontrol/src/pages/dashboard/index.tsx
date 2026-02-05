@@ -1,7 +1,7 @@
 "use client"
 
 import AreaChart from "@/components/dashboard"
-import SidebarLayout from "@/components/layout"
+import SidebarLayout from "@/components/layoutmain"
 import {
   Card,
   CardContent,

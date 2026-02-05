@@ -3,28 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FC7D095E-E248-464A-BEEE-6B8444BCD29B}|src\\FinanceControl.Repositories\\FinanceControl.Repositories.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.repositories\\scripts\\peoplescripts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC7D095E-E248-464A-BEEE-6B8444BCD29B}|src\\FinanceControl.Repositories\\FinanceControl.Repositories.csproj|solutionrelative:src\\financecontrol.repositories\\scripts\\peoplescripts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FC7D095E-E248-464A-BEEE-6B8444BCD29B}|src\\FinanceControl.Repositories\\FinanceControl.Repositories.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.repositories\\base\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC7D095E-E248-464A-BEEE-6B8444BCD29B}|src\\FinanceControl.Repositories\\FinanceControl.Repositories.csproj|solutionrelative:src\\financecontrol.repositories\\base\\baserepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FC7D095E-E248-464A-BEEE-6B8444BCD29B}|src\\FinanceControl.Repositories\\FinanceControl.Repositories.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.repositories\\scripts\\reportscripts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FC7D095E-E248-464A-BEEE-6B8444BCD29B}|src\\FinanceControl.Repositories\\FinanceControl.Repositories.csproj|solutionrelative:src\\financecontrol.repositories\\scripts\\reportscripts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{FC7D095E-E248-464A-BEEE-6B8444BCD29B}|src\\FinanceControl.Repositories\\FinanceControl.Repositories.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.repositories\\transactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FC7D095E-E248-464A-BEEE-6B8444BCD29B}|src\\FinanceControl.Repositories\\FinanceControl.Repositories.csproj|solutionrelative:src\\financecontrol.repositories\\transactionrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F5D2D343-57BA-488B-AF5D-3A20625DB3F4}|src\\FinanceControl.WebAPI\\FinanceControl.WebAPI.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.webapi\\controllers\\peoplecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5D2D343-57BA-488B-AF5D-3A20625DB3F4}|src\\FinanceControl.WebAPI\\FinanceControl.WebAPI.csproj|solutionrelative:src\\financecontrol.webapi\\controllers\\peoplecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F5D2D343-57BA-488B-AF5D-3A20625DB3F4}|src\\FinanceControl.WebAPI\\FinanceControl.WebAPI.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.webapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F5D2D343-57BA-488B-AF5D-3A20625DB3F4}|src\\FinanceControl.WebAPI\\FinanceControl.WebAPI.csproj|solutionrelative:src\\financecontrol.webapi\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F90AF05E-6DE8-4E69-B84D-B473E9E850B1}|src\\FinanceControl.Services\\FinanceControl.Services.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F90AF05E-6DE8-4E69-B84D-B473E9E850B1}|src\\FinanceControl.Services\\FinanceControl.Services.csproj|solutionrelative:src\\financecontrol.services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\docker-compose.dcproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|solutionrelative:docker-compose.dcproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{F5D2D343-57BA-488B-AF5D-3A20625DB3F4}|src\\FinanceControl.WebAPI\\FinanceControl.WebAPI.csproj|c:\\users\\wellington\\documents\\projeto teste\\teste t\u00E9cnico\\backend\\financecontrol\\src\\financecontrol.webapi\\extensions\\repositoryextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F5D2D343-57BA-488B-AF5D-3A20625DB3F4}|src\\FinanceControl.WebAPI\\FinanceControl.WebAPI.csproj|solutionrelative:src\\financecontrol.webapi\\extensions\\repositoryextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,79 +27,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PeopleScripts.cs",
-              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Repositories\\Scripts\\PeopleScripts.cs",
-              "RelativeDocumentMoniker": "src\\FinanceControl.Repositories\\Scripts\\PeopleScripts.cs",
-              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Repositories\\Scripts\\PeopleScripts.cs",
-              "RelativeToolTip": "src\\FinanceControl.Repositories\\Scripts\\PeopleScripts.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAAwB8AAAAgAAAAAAAAAA==",
+              "Title": "BaseRepository.cs",
+              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Repositories\\Base\\BaseRepository.cs",
+              "RelativeDocumentMoniker": "src\\FinanceControl.Repositories\\Base\\BaseRepository.cs",
+              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Repositories\\Base\\BaseRepository.cs",
+              "RelativeToolTip": "src\\FinanceControl.Repositories\\Base\\BaseRepository.cs",
+              "ViewState": "AgIAAEEAAAAAAAAAAADwv0UAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T00:15:55.046Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ReportScripts.cs",
-              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Repositories\\Scripts\\ReportScripts.cs",
-              "RelativeDocumentMoniker": "src\\FinanceControl.Repositories\\Scripts\\ReportScripts.cs",
-              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Repositories\\Scripts\\ReportScripts.cs",
-              "RelativeToolTip": "src\\FinanceControl.Repositories\\Scripts\\ReportScripts.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T00:15:48.874Z",
+              "WhenOpened": "2026-02-05T14:06:35.819Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "PeopleController.cs",
-              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.WebAPI\\Controllers\\PeopleController.cs",
-              "RelativeDocumentMoniker": "src\\FinanceControl.WebAPI\\Controllers\\PeopleController.cs",
-              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.WebAPI\\Controllers\\PeopleController.cs",
-              "RelativeToolTip": "src\\FinanceControl.WebAPI\\Controllers\\PeopleController.cs",
-              "ViewState": "AgIAAJgAAAAAAAAAAAAgwKMAAAASAAAAAAAAAA==",
+              "Title": "RepositoryExtensions.cs",
+              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.WebAPI\\Extensions\\RepositoryExtensions.cs",
+              "RelativeDocumentMoniker": "src\\FinanceControl.WebAPI\\Extensions\\RepositoryExtensions.cs",
+              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.WebAPI\\Extensions\\RepositoryExtensions.cs",
+              "RelativeToolTip": "src\\FinanceControl.WebAPI\\Extensions\\RepositoryExtensions.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwA8AAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T00:12:53.277Z",
+              "WhenOpened": "2026-02-05T13:58:04.929Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AuthController.cs",
-              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.WebAPI\\Controllers\\AuthController.cs",
-              "RelativeDocumentMoniker": "src\\FinanceControl.WebAPI\\Controllers\\AuthController.cs",
-              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.WebAPI\\Controllers\\AuthController.cs",
-              "RelativeToolTip": "src\\FinanceControl.WebAPI\\Controllers\\AuthController.cs",
-              "ViewState": "AgIAADEAAAAAAAAAAAAQwD8AAAA2AAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "TransactionRepository.cs",
+              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Repositories\\TransactionRepository.cs",
+              "RelativeDocumentMoniker": "src\\FinanceControl.Repositories\\TransactionRepository.cs",
+              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Repositories\\TransactionRepository.cs",
+              "RelativeToolTip": "src\\FinanceControl.Repositories\\TransactionRepository.cs",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAqwGwAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T00:10:11.868Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AuthService.cs",
-              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Services\\AuthService.cs",
-              "RelativeDocumentMoniker": "src\\FinanceControl.Services\\AuthService.cs",
-              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\src\\FinanceControl.Services\\AuthService.cs*",
-              "RelativeToolTip": "src\\FinanceControl.Services\\AuthService.cs*",
-              "ViewState": "AgIAACMAAAAAAAAAAAAcwDkAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-02-05T00:09:15.981Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "docker-compose",
-              "DocumentMoniker": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\docker-compose.dcproj",
-              "RelativeDocumentMoniker": "docker-compose.dcproj",
-              "ToolTip": "C:\\Users\\wellington\\Documents\\Projeto teste\\teste t\u00E9cnico\\Backend\\FinanceControl\\docker-compose.dcproj",
-              "RelativeToolTip": "docker-compose.dcproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-02-04T23:50:17.93Z",
+              "WhenOpened": "2026-02-05T13:50:46.824Z",
               "EditorCaption": ""
             }
           ]

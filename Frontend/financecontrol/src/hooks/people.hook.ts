@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import type { IPeople } from "@/interfaces/IPeople";
 import PeopleAPI from "@/apis/PeopleAPI";
 import { StoresContext } from "@/stores/inject";
+import md5 from "md5";
 
 export const usePeople = () => {
 
@@ -12,7 +13,10 @@ export const usePeople = () => {
 
     const insert = async (request: IPeople) => {
         setLoading(true);
+        var password = request.password;
+
         try {
+            request.password = md5(request.password);
             const { data } = await PeopleAPI.insert(request);
             if (data.error) {
                 toast.error(data.message);
@@ -23,8 +27,10 @@ export const usePeople = () => {
             return data;
         } catch (error) {
             handleApiError(error, "Erro ao cadastrar pessoa");
+            request.password = password;
         } finally {
             setLoading(false);
+            request.password = password;
         }
     };
 
@@ -61,14 +67,21 @@ export const usePeople = () => {
 
     const firstRegister = async (request: IPeople) => {
         setLoading(true);
+        var password = request.password;
+
         try {
+
+            request.password = md5(request.password);
+
             const { data } = await PeopleAPI.firstRegister(request);
             toast.success("Registro inicial realizado!");
             return data;
         } catch (error) {
             handleApiError(error, "Erro no registro inicial");
+            request.password = password;
         } finally {
             setLoading(false);
+            request.password = password;
         }
     };
 

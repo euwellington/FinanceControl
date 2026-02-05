@@ -1,6 +1,5 @@
 "use client"
 
-import SidebarLayout from "@/components/layout"
 import {
   Card,
   CardContent,
@@ -28,10 +27,10 @@ import {
 
 const DocBackendTransaction = () => {
   return (
-    <SidebarLayout>
-      <div className="flex flex-col gap-16 max-w-6xl pb-20">
+    <div>
+      <div className="flex flex-col gap-16 max-w-6xl pb-24 mx-auto px-4">
 
-        <div className="space-y-6">
+        <div className="space-y-6 pt-8 text-center md:text-left">
           <div className="flex items-center gap-2">
             <Badge variant="secondary" className="px-3 py-1 text-xs font-semibold uppercase tracking-wider">
               Core Engine
@@ -46,8 +45,8 @@ const DocBackendTransaction = () => {
           </h1>
 
           <p className="text-xl text-muted-foreground leading-relaxed max-w-4xl">
-            As transações são a unidade fundamental do <strong>Finance Control</strong>. Este módulo 
-            gerencia o fluxo de capital, aplicando regras de integridade que impedem inconsistências 
+            As transações são a unidade fundamental do <strong>Finance Control</strong>. Este módulo
+            gerencia o fluxo de capital, aplicando regras de integridade que impedem inconsistências
             entre usuários, categorias e saldos reais.
           </p>
 
@@ -95,7 +94,7 @@ const DocBackendTransaction = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    A entidade foi projetada para ser autossuficiente em termos de auditoria básica, 
+                    A entidade foi projetada para ser autossuficiente em termos de auditoria básica,
                     mantendo referências externas para <strong>Person</strong> (Usuário) e <strong>Category</strong>.
                   </p>
                   <ul className="space-y-3">
@@ -116,7 +115,7 @@ const DocBackendTransaction = () => {
                     <span>TransactionSchema.cs</span>
                   </div>
                   <pre className="font-mono text-xs text-blue-300 space-y-1">
-{`public class Transaction {
+                    {`public class Transaction {
   public Guid Id { get; set; }
   public string Description { get; set; }
   public decimal Amount { get; set; }
@@ -156,8 +155,8 @@ const DocBackendTransaction = () => {
                 <CardTitle className="text-lg">Política para Menores</CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground leading-relaxed">
-                Usuários com idade inferior a <strong>18 anos</strong> possuem restrições operacionais. 
-                Por questões de conformidade, o sistema bloqueia o registro de <code>Income</code> (Receitas) 
+                Usuários com idade inferior a <strong>18 anos</strong> possuem restrições operacionais.
+                Por questões de conformidade, o sistema bloqueia o registro de <code>Income</code> (Receitas)
                 para este perfil, permitindo apenas a gestão de despesas assistidas.
               </CardContent>
             </Card>
@@ -171,7 +170,7 @@ const DocBackendTransaction = () => {
                 <CardTitle className="text-lg">Coerência de Tipo</CardTitle>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground leading-relaxed">
-                Não é permitido associar uma despesa a uma categoria marcada como <strong>"Finalidade: Receita"</strong>. 
+                Não é permitido associar uma despesa a uma categoria marcada como <strong>"Finalidade: Receita"</strong>.
                 Isso evita que gastos com "Alimentação" sejam registrados erroneamente como ganhos salariais.
               </CardContent>
             </Card>
@@ -199,7 +198,7 @@ const DocBackendTransaction = () => {
             <CardContent className="p-0">
               <div className="bg-slate-950 p-6 font-mono text-[13px] leading-relaxed overflow-x-auto text-slate-300">
                 <pre className="">
-{`namespace FinanceControl.Services.Validation;
+                  {`namespace FinanceControl.Services.Validation;
 
 public class TransactionValidation : AbstractValidator<Transaction>
 {
@@ -266,8 +265,7 @@ public class TransactionValidation : AbstractValidator<Transaction>
           </div>
 
           <div className="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-300 before:to-transparent">
-            
-            {/* Step 1 */}
+
             <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
               <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-100 group-hover:bg-primary group-hover:text-white transition-colors shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
                 <Zap className="w-5 h-5" />
@@ -278,7 +276,6 @@ public class TransactionValidation : AbstractValidator<Transaction>
               </Card>
             </div>
 
-            {/* Step 2 */}
             <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
               <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-100 group-hover:bg-primary group-hover:text-white transition-colors shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
                 <Code2 className="w-5 h-5" />
@@ -289,7 +286,6 @@ public class TransactionValidation : AbstractValidator<Transaction>
               </Card>
             </div>
 
-            {/* Step 3 */}
             <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
               <div className="flex items-center justify-center w-10 h-10 rounded-full border border-white bg-slate-100 group-hover:bg-primary group-hover:text-white transition-colors shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2">
                 <Database className="w-5 h-5" />
@@ -314,21 +310,21 @@ public class TransactionValidation : AbstractValidator<Transaction>
             <CardContent className="p-10 text-center space-y-4">
               <h3 className="text-2xl font-bold">A Confiabilidade como Prioridade</h3>
               <p className="text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-                O módulo de Transações foi construído para ser à prova de falhas. Ao centralizar as regras de 
-                validação em uma classe <code>TransactionValidation</code> dedicada, garantimos que tanto 
-                a criação manual quanto importações em lote sigam rigorosamente os mesmos critérios. 
-                Isso protege o sistema de "erros silenciosos" que poderiam corromper os saldos financeiros 
+                O módulo de Transações foi construído para ser à prova de falhas. Ao centralizar as regras de
+                validação em uma classe <code>TransactionValidation</code> dedicada, garantimos que tanto
+                a criação manual quanto importações em lote sigam rigorosamente os mesmos critérios.
+                Isso protege o sistema de "erros silenciosos" que poderiam corromper os saldos financeiros
                 ao longo do tempo.
               </p>
               <div className="pt-4">
-                 <Badge variant="outline" className="border-primary text-primary">Pronto para Produção</Badge>
+                <Badge variant="outline" className="border-primary text-primary">Pronto para Produção</Badge>
               </div>
             </CardContent>
           </Card>
         </section>
 
       </div>
-    </SidebarLayout>
+    </div>
   )
 }
 

@@ -9,12 +9,13 @@ using System.Text;
 
 namespace FinanceControl.Repositories.Base;
 
-public abstract class BaseRepository : IDisposable
+// Removido o IDisposable daqui
+public abstract class BaseRepository
 {
-    public readonly MySqlConnection _mySqlConnection; // Conexão com MySQL
+    public readonly MySqlConnection _mySqlConnection;
     private HttpContext? _context;
-    private readonly ILogger _logger; 
-    protected static ICrudLoggerRepository? _crudLoggerRepositoryStatic; // Logger de CRUD
+    private readonly ILogger _logger;
+    protected static ICrudLoggerRepository? _crudLoggerRepositoryStatic;
 
     protected BaseRepository(MySqlConnection mySqlConnection, ILogger logger, IHttpContextAccessor httpContextAccessor)
     {
@@ -25,10 +26,10 @@ public abstract class BaseRepository : IDisposable
 
     public static void ConfigureCrudLogger(ICrudLoggerRepository logger)
     {
-        _crudLoggerRepositoryStatic = logger; // Configura logger de CRUD estático
+        _crudLoggerRepositoryStatic = logger;
     }
 
-    protected Guid GetUserId() // Pega ID do usuário logado
+    protected Guid GetUserId()
     {
         try
         {
@@ -42,7 +43,7 @@ public abstract class BaseRepository : IDisposable
         }
     }
 
-    protected string GetUserName() // Pega nome do usuário
+    protected string GetUserName()
     {
         try
         {
@@ -56,33 +57,36 @@ public abstract class BaseRepository : IDisposable
         }
     }
 
-    // Executa INSERT/UPDATE/DELETE e registra log se necessário
     protected async Task<bool> ExecuteAsync(string sql, object parameters, CrudAction? action = null)
     {
-        if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
-            await _mySqlConnection.OpenAsync();
-
         try
         {
+            // O Dapper abre e fecha a conexão automaticamente se ela estiver fechada.
+            // Ao remover o OpenAsync manual, evitamos o travamento (Connection Leak).
             var result = await _mySqlConnection.ExecuteAsync(sql, parameters) > 0;
 
             if (result && parameters != null && action.HasValue && _crudLoggerRepositoryStatic != null)
             {
                 var userId = GetUserId();
                 var userName = string.IsNullOrEmpty(GetUserName()) ? "First Registration" : GetUserName();
+
+                var idProperty = parameters.GetType().GetProperty("Id");
+                var idValue = idProperty?.GetValue(parameters)?.ToString() ?? "";
+
                 await _crudLoggerRepositoryStatic.LogAsync(action.Value, parameters,
-                    parameters.GetType().GetProperty("Id")?.GetValue(parameters)?.ToString() ?? "", userId.ToString(), userName);
+                    idValue, userId.ToString(), userName);
             }
 
             return result;
         }
-        catch
+        catch (Exception ex)
         {
+            _logger.LogError(ex, "Erro ao executar query");
             throw;
         }
     }
 
-    protected async Task<T> GetOneAsync<T>(string sql, object filters) // Pega um registro
+    protected async Task<T> GetOneAsync<T>(string sql, object filters)
     {
         try
         {
@@ -94,13 +98,13 @@ public abstract class BaseRepository : IDisposable
         }
     }
 
-    protected async Task<IEnumerable<T>> GetListAsync<T>(string sql, object? filters) // Pega vários registros
+    protected async Task<IEnumerable<T>> GetListAsync<T>(string sql, object? filters)
     {
-        if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
-            await _mySqlConnection.OpenAsync();
-
         try
         {
+            if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
+                await _mySqlConnection.OpenAsync();
+
             return await _mySqlConnection.QueryAsync<T>(sql, filters);
         }
         catch
@@ -109,13 +113,13 @@ public abstract class BaseRepository : IDisposable
         }
     }
 
-    protected bool AlreadyExists(string sql, object filters) // Verifica se registro existe
+    protected bool AlreadyExists(string sql, object filters)
     {
-        if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
-            _mySqlConnection.Open();
-
         try
         {
+            if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
+                _mySqlConnection.Open();
+
             return _mySqlConnection.QueryFirstOrDefault<int>(sql, filters) > 0;
         }
         catch (Exception ex)
@@ -125,7 +129,6 @@ public abstract class BaseRepository : IDisposable
         }
     }
 
-    // Múltiplos joins usando Dapper
     protected async Task<IEnumerable<TResult>> GetMultiListAsync<TResult, T1, T2, T3, T4, T5, T6>(
         string sql,
         Func<TResult, T1, T2, T3, T4, T5, T6, TResult> map,
@@ -152,11 +155,10 @@ public abstract class BaseRepository : IDisposable
         }
     }
 
-    // Métodos auxiliares para filtros SQL
     protected static void AddFilter<T>(StringBuilder sql, DynamicParameters parameters, T value, string condition, string paramName)
     {
         if (value == null) return;
-        sql.AppendLine($"AND {condition}");
+        sql.AppendLine($"{condition}");
         parameters.Add(paramName, value);
     }
 
@@ -164,7 +166,7 @@ public abstract class BaseRepository : IDisposable
     {
         var text = value?.ToString();
         if (string.IsNullOrWhiteSpace(text)) return;
-        sql.AppendLine($"AND {condition}");
+        sql.AppendLine($"{condition}");
         parameters.Add(paramName, $"%{text}%");
     }
 
@@ -189,7 +191,6 @@ public abstract class BaseRepository : IDisposable
         if (to.HasValue) { sql.AppendLine($"AND {column} <= @{prefix}To"); parameters.Add($"{prefix}To", to.Value.Date); }
     }
 
-    // Métodos para log de erro
     protected void LogError(Exception exception, string methodName, string sql, object? parameters)
     {
         var methodDetails = new { Name = methodName, SQL = sql, Parameters = parameters };
@@ -202,13 +203,5 @@ public abstract class BaseRepository : IDisposable
         _logger.LogError(exception, "Error: {Error}. Method: {Method}.", GetError(exception), methodDetails);
     }
 
-    protected void LogErrorMongo(Exception exception, string methodName, object? parameters)
-    {
-        var methodDetails = new { Name = methodName, Parameters = parameters };
-        _logger.LogError(exception, "Error: {Error}. Method: {Method}.", GetError(exception), methodDetails);
-    }
-
     private static string GetError(Exception exception) => exception.InnerException is not null ? exception.InnerException.Message : exception.Message;
-
-    public void Dispose() => _mySqlConnection?.Dispose(); // Libera conexão
 }

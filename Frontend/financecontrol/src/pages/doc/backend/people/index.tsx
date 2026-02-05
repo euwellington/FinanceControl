@@ -1,6 +1,5 @@
 "use client"
 
-import SidebarLayout from "@/components/layout"
 import {
   Card,
   CardContent,
@@ -14,7 +13,6 @@ import {
   Users,
   Database,
   ShieldCheck,
-  Search,
   UserPlus,
   UserCheck,
   UserMinus,
@@ -33,10 +31,10 @@ import {
 
 const DocBackendPeople = () => {
   return (
-    <SidebarLayout>
-      <div className="flex flex-col gap-16 max-w-6xl pb-24">
+    <div>
+      <div className="flex flex-col gap-16 max-w-6xl pb-24 mx-auto px-4">
 
-        <div className="space-y-6">
+        <div className="space-y-6 pt-8 text-center md:text-left">
           <div className="flex items-center gap-2">
             <Badge variant="secondary" className="px-3 py-1 text-xs font-bold uppercase tracking-widest">
               Gerenciamento de Entidades
@@ -51,8 +49,8 @@ const DocBackendPeople = () => {
           </h1>
 
           <p className="text-xl text-muted-foreground leading-relaxed max-w-4xl">
-            O módulo <strong>People</strong> é a base identitária do sistema Finance Control. 
-            Ele gerencia os perfis que interagem com o capital, definindo permissões 
+            O módulo <strong>People</strong> é a base identitária do sistema Finance Control.
+            Ele gerencia os perfis que interagem com o capital, definindo permissões
             operacionais baseadas em atributos como idade e status de conta.
           </p>
 
@@ -97,10 +95,10 @@ const DocBackendPeople = () => {
             </CardHeader>
             <CardContent className="space-y-6 text-muted-foreground leading-relaxed">
               <p>
-                No backend do <strong>Finance Control</strong>, uma "Pessoa" representa qualquer 
-                entidade (física ou jurídica, dependendo da configuração) que possa ser origem 
-                ou destino de uma movimentação financeira. O atributo <code>Age</code> (Idade) 
-                é crítico, pois o motor de regras de negócio utiliza este valor para bloquear 
+                No backend do <strong>Finance Control</strong>, uma "Pessoa" representa qualquer
+                entidade (física ou jurídica, dependendo da configuração) que possa ser origem
+                ou destino de uma movimentação financeira. O atributo <code>Age</code> (Idade)
+                é crítico, pois o motor de regras de negócio utiliza este valor para bloquear
                 operações de crédito/receita para menores de idade, garantindo conformidade.
               </p>
 
@@ -109,8 +107,8 @@ const DocBackendPeople = () => {
                   <Briefcase className="h-4 w-4" /> Dependências de Módulo
                 </h4>
                 <p className="text-sm">
-                  Este módulo é a dependência primária para o módulo de <strong>Transactions</strong> 
-                  e para o <strong>Report Engine</strong>. Nenhuma transação pode existir sem um 
+                  Este módulo é a dependência primária para o módulo de <strong>Transactions</strong>
+                  e para o <strong>Report Engine</strong>. Nenhuma transação pode existir sem um
                   vínculo de <code>PersonId</code> válido e ativo.
                 </p>
               </div>
@@ -133,7 +131,7 @@ const DocBackendPeople = () => {
                   <h3 className="text-xl font-bold mb-2">Schema de Person</h3>
                   <p className="text-muted-foreground text-sm">Definição das propriedades para persistência em bancos relacionais.</p>
                 </div>
-                
+
                 <div className="space-y-4">
                   <div className="flex items-center justify-between p-3 rounded-lg bg-muted/50 border">
                     <span className="font-mono text-xs font-bold">Id</span>
@@ -152,7 +150,7 @@ const DocBackendPeople = () => {
                 <div className="p-4 rounded-lg bg-blue-50 border border-blue-100">
                   <p className="text-xs text-blue-800 leading-relaxed font-medium">
                     <Info className="h-3 w-3 inline mr-1 mb-0.5" />
-                    <strong>Nota de Implementação:</strong> O campo <code>Name</code> possui indexação 
+                    <strong>Nota de Implementação:</strong> O campo <code>Name</code> possui indexação
                     especial no MySQL para permitir buscas parciais otimizadas via cláusula <code>LIKE</code>.
                   </p>
                 </div>
@@ -164,7 +162,7 @@ const DocBackendPeople = () => {
                   <Terminal className="h-4 w-4 text-slate-500" />
                 </div>
                 <pre className="font-mono text-[13px] text-emerald-400 leading-relaxed">
-{`public class Person
+                  {`public class Person
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
@@ -193,7 +191,6 @@ const DocBackendPeople = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-6">
-            {/* GET ALL */}
             <Card className="border-l-4 border-l-blue-500 hover:shadow-md transition-shadow">
               <CardHeader className="flex flex-row items-center justify-between py-4">
                 <div className="flex items-center gap-4">
@@ -206,12 +203,11 @@ const DocBackendPeople = () => {
                 </div>
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground border-t pt-4">
-                Lista todas as pessoas de forma paginada. Suporta query params <code>name</code> para filtragem 
+                Lista todas as pessoas de forma paginada. Suporta query params <code>name</code> para filtragem
                 reativa conforme o usuário digita no frontend.
               </CardContent>
             </Card>
 
-            {/* POST */}
             <Card className="border-l-4 border-l-green-500 hover:shadow-md transition-shadow">
               <CardHeader className="flex flex-row items-center justify-between py-4">
                 <div className="flex items-center gap-4">
@@ -221,12 +217,11 @@ const DocBackendPeople = () => {
                 <UserPlus className="h-5 w-5 text-green-600 opacity-30" />
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground border-t pt-4">
-                Insere uma nova pessoa no banco. O corpo da requisição deve conter <code>Name</code> e <code>Age</code>. 
+                Insere uma nova pessoa no banco. O corpo da requisição deve conter <code>Name</code> e <code>Age</code>.
                 Retorna o objeto criado com seu novo <code>Guid</code> gerado pelo servidor.
               </CardContent>
             </Card>
 
-            {/* PUT */}
             <Card className="border-l-4 border-l-amber-500 hover:shadow-md transition-shadow">
               <CardHeader className="flex flex-row items-center justify-between py-4">
                 <div className="flex items-center gap-4">
@@ -236,12 +231,11 @@ const DocBackendPeople = () => {
                 <RefreshCcw className="h-5 w-5 text-amber-600 opacity-30" />
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground border-t pt-4">
-                Atualiza os dados de uma pessoa. Caso a idade seja alterada para menor de 18 anos, 
+                Atualiza os dados de uma pessoa. Caso a idade seja alterada para menor de 18 anos,
                 o sistema não altera transações passadas, mas bloqueia futuras receitas.
               </CardContent>
             </Card>
 
-            {/* DELETE */}
             <Card className="border-l-4 border-l-red-500 hover:shadow-md transition-shadow">
               <CardHeader className="flex flex-row items-center justify-between py-4">
                 <div className="flex items-center gap-4">
@@ -251,7 +245,7 @@ const DocBackendPeople = () => {
                 <UserMinus className="h-5 w-5 text-red-600 opacity-30" />
               </CardHeader>
               <CardContent className="text-sm text-muted-foreground border-t pt-4">
-                Executa a remoção lógica. A pessoa é desativada mas seu histórico financeiro permanece 
+                Executa a remoção lógica. A pessoa é desativada mas seu histórico financeiro permanece
                 intacto para consultas de auditoria e balanços anuais.
               </CardContent>
             </Card>
@@ -290,24 +284,24 @@ const DocBackendPeople = () => {
             </div>
 
             <div className="bg-slate-900 rounded-2xl p-6 shadow-2xl relative overflow-hidden group">
-               <div className="absolute -right-4 -top-4 opacity-10 group-hover:scale-110 transition-transform">
-                  <Code2 className="h-32 w-32 text-white" />
-               </div>
-               <div className="relative z-10">
-                  <h4 className="text-white font-bold mb-4">Snippet: Validator Person</h4>
-                  <pre className="text-[12px] font-mono text-blue-300 leading-relaxed">
-{`RuleFor(p => p.Name)
+              <div className="absolute -right-4 -top-4 opacity-10 group-hover:scale-110 transition-transform">
+                <Code2 className="h-32 w-32 text-white" />
+              </div>
+              <div className="relative z-10">
+                <h4 className="text-white font-bold mb-4">Snippet: Validator Person</h4>
+                <pre className="text-[12px] font-mono text-blue-300 leading-relaxed">
+                  {`RuleFor(p => p.Name)
     .NotEmpty().WithMessage("Nome é vital.")
     .MaximumLength(400);
 
 RuleFor(p => p.Age)
     .InclusiveBetween(0, 150)
     .WithMessage("Idade fora dos limites.");`}
-                  </pre>
-                  <p className="mt-6 text-xs text-slate-400 italic">
-                    Centralizar validações evita que dados corrompidos cheguem à camada de persistência Dapper/EF.
-                  </p>
-               </div>
+                </pre>
+                <p className="mt-6 text-xs text-slate-400 italic">
+                  Centralizar validações evita que dados corrompidos cheguem à camada de persistência Dapper/EF.
+                </p>
+              </div>
             </div>
           </div>
         </section>
@@ -323,14 +317,14 @@ RuleFor(p => p.Age)
           <Card className="bg-primary text-primary-foreground border-none shadow-2xl overflow-hidden">
             <CardContent className="p-12 relative">
               <div className="absolute top-0 right-0 p-8 opacity-20">
-                 <Users className="h-48 w-48 text-white" />
+                <Users className="h-48 w-48 text-white" />
               </div>
               <div className="max-w-3xl space-y-6 relative z-10">
                 <h3 className="text-3xl font-bold">Sólido e Escalável</h3>
                 <p className="text-primary-foreground/90 text-lg leading-relaxed">
-                  O módulo de pessoas foi projetado para suportar desde pequenas residências até 
-                  configurações corporativas complexas. A utilização de identificadores GUID e 
-                  a lógica de remoção lógica (Soft Delete) garantem que o Finance Control seja 
+                  O módulo de pessoas foi projetado para suportar desde pequenas residências até
+                  configurações corporativas complexas. A utilização de identificadores GUID e
+                  a lógica de remoção lógica (Soft Delete) garantem que o Finance Control seja
                   um sistema robusto, onde nenhum histórico financeiro é perdido por ações acidentais.
                 </p>
                 <div className="flex flex-wrap gap-4 pt-4">
@@ -345,7 +339,7 @@ RuleFor(p => p.Age)
         </section>
 
       </div>
-    </SidebarLayout>
+    </div>
   )
 }
 

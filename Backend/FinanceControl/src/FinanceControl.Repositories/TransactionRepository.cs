@@ -14,12 +14,12 @@ using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-    
+
 namespace FinanceControl.Repositories;
 
 public class TransactionRepository : BaseRepository, ITransactionRepository
 {
-    private readonly ILogger _logger;
+    private readonly ILogger<TransactionRepository> _logger;
 
     public TransactionRepository(
         MySqlConnection mySqlConnection,
@@ -34,35 +34,41 @@ public class TransactionRepository : BaseRepository, ITransactionRepository
     {
         try
         {
-            var sql = new StringBuilder();
-            sql.AppendLine(TransactionScripts.SelectBase);
+            var sqlBase = new StringBuilder();
+            sqlBase.AppendLine(TransactionScripts.SelectBase);
 
-            var parameters = new DynamicParameters(); 
+            var parameters = new DynamicParameters();
 
-            AddLikeFilter(sql, parameters, request.Description, "t.Description LIKE @Description", "Description");
-            AddFilter(sql, parameters, request.PersonId, "t.PersonId = @PersonId", "PersonId");
-            AddFilter(sql, parameters, request.CategoryId, "t.CategoryId = @CategoryId", "CategoryId");
-            AddFilter(sql, parameters, request.Type, "t.Type = @Type", "Type");
+            AddLikeFilter(sqlBase, parameters, request.Description, "AND t.Description LIKE @Description", "Description");
+            AddFilter(sqlBase, parameters, request.PersonId, "AND t.PersonId = @PersonId", "PersonId");
+            AddFilter(sqlBase, parameters, request.CategoryId, "AND t.CategoryId = @CategoryId", "CategoryId");
+            AddFilter(sqlBase, parameters, request.Type, "AND t.Type = @Type", "Type");
 
             if (request.Amount > 0)
-                AddFilter(sql, parameters, request.Amount, "t.Amount = @Amount", "Amount");
+                AddFilter(sqlBase, parameters, request.Amount, "AND t.Amount = @Amount", "Amount");
 
             if (request.CreatedAt != DateTime.MinValue)
-                AddFilter(sql, parameters, request.CreatedAt, "DATE(t.CreatedAt) = DATE(@CreatedAt)", "CreatedAt");
+                AddFilter(sqlBase, parameters, request.CreatedAt, "AND DATE(t.CreatedAt) = DATE(@CreatedAt)", "CreatedAt");
 
-            var countSql = $"SELECT COUNT(1) FROM ({sql}) AS CountQuery";
+            // Correção do Count: Garantir que a subquery seja uma string válida e limpa
+            var countSql = $"SELECT COUNT(1) FROM ({sqlBase.ToString()}) AS Total";
+
+            if (_mySqlConnection.State == System.Data.ConnectionState.Closed)
+                await _mySqlConnection.OpenAsync();
+
             var totalRecords = await _mySqlConnection.ExecuteScalarAsync<int>(countSql, parameters);
 
+            // Agora adicionamos a ordenação e paginação apenas para a query de dados
+            var sqlData = new StringBuilder(sqlBase.ToString());
             var offset = (request.Page - 1) * request.PageSize;
-            sql.AppendLine("ORDER BY t.CreatedAt DESC");
-            sql.AppendLine("LIMIT @PageSize OFFSET @Offset");
+
+            sqlData.AppendLine(" ORDER BY t.CreatedAt DESC ");
+            sqlData.AppendLine(" LIMIT @PageSize OFFSET @Offset ");
 
             parameters.Add("PageSize", request.PageSize);
             parameters.Add("Offset", offset);
 
-            var transactions = (await _mySqlConnection
-                .QueryAsync<Transaction>(sql.ToString(), parameters))
-                .ToList();
+            var transactions = (await _mySqlConnection.QueryAsync<Transaction>(sqlData.ToString(), parameters)).ToList();
 
             return new PagedResponse<Transaction>().ResponseSuccess(
                 "List loaded successfully",
@@ -72,11 +78,12 @@ public class TransactionRepository : BaseRepository, ITransactionRepository
                 request.PageSize
             );
         }
-        catch
+        catch (Exception ex)
         {
+            _logger.LogError(ex, "Error in GetAll transactions");
             throw;
         }
-    }
+    }   
 
     public async Task<Transaction> GetById(Guid id)
     {
@@ -85,14 +92,9 @@ public class TransactionRepository : BaseRepository, ITransactionRepository
             var sql = $"{TransactionScripts.SelectBase} {TransactionScripts.AndId}";
             return await GetOneAsync<Transaction>(sql, new { Id = id });
         }
-        catch (DbException ex)
-        {
-            LogError(ex, "GetById", "Error executing GetById query", new { Id = id });
-            throw;
-        }
         catch (Exception ex)
         {
-            LogError(ex, "GetById", "Unexpected error in GetById", new { Id = id });
+            LogError(ex, "GetById", "Error executing GetById query", new { Id = id });
             throw;
         }
     }
@@ -109,9 +111,9 @@ public class TransactionRepository : BaseRepository, ITransactionRepository
 
             return response.ResponseErro("Error while creating record");
         }
-        catch (DbException ex)
+        catch (Exception ex)
         {
-            LogError(ex, "Insert", sql, request.Serialize());
+            LogError(ex, "Insert", sql, request);
             throw;
         }
     }
@@ -123,20 +125,14 @@ public class TransactionRepository : BaseRepository, ITransactionRepository
 
         try
         {
-            var typeString = request.Type.ToString();
-
-            request.Type = Enum.TryParse(typeString, out TransactionType parsedType)
-                ? parsedType
-                : throw new ArgumentException($"Invalid TransactionType: {typeString}");
-
             if (await ExecuteAsync(sql, request, CrudAction.Update))
                 return response.ResponseSuccess("Successfully updated", request);
 
             return response.ResponseErro("Error while updating record");
         }
-        catch (DbException ex)
+        catch (Exception ex)
         {
-            LogError(ex, "Update", sql, request.Serialize());
+            LogError(ex, "Update", sql, request);
             throw;
         }
     }
@@ -154,7 +150,7 @@ public class TransactionRepository : BaseRepository, ITransactionRepository
 
             return response.ResponseErro("Error while deleting record");
         }
-        catch (DbException ex)
+        catch (Exception ex)
         {
             LogError(ex, "Delete", sql, parameters);
             throw;

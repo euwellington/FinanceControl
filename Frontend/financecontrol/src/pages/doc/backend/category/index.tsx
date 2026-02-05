@@ -1,6 +1,5 @@
 "use client"
 
-import SidebarLayout from "@/components/layout"
 import {
   Card,
   CardContent,
@@ -13,10 +12,6 @@ import { Separator } from "@/components/ui/separator"
 import {
   Tags,
   Database,
-  List,
-  PlusCircle,
-  RefreshCcw,
-  Trash2,
   ShieldCheck,
   Code2,
   Info,
@@ -31,15 +26,12 @@ import {
 
 const DocBackendCategory = () => {
   return (
-    <SidebarLayout>
-      <div className="flex flex-col gap-16 max-w-6xl pb-24">
+    <div>
+      <div className="flex flex-col gap-16 max-w-6xl pb-24 mx-auto px-4">
 
-        <div className="space-y-6">
+        <div className="space-y-6 pt-8 text-center md:text-left">
           <div className="flex items-center gap-2">
-            <Badge variant="secondary" className="px-3 py-1 text-xs font-bold uppercase tracking-widest">
-              Taxonomia de Dados
-            </Badge>
-            <Badge variant="outline" className="px-3 py-1 text-xs font-bold uppercase tracking-widest text-primary border-primary">
+            <Badge variant="secondary" className="px-3 py-1 text-xs font-semibold uppercase tracking-wider">
               Módulo de Classificação
             </Badge>
           </div>
@@ -211,7 +203,6 @@ public enum CategoryPurpose
           </div>
 
           <div className="space-y-6">
-            {/* GET */}
             <Card className="border-l-4 border-l-blue-500">
               <CardHeader className="flex flex-row items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -226,7 +217,6 @@ public enum CategoryPurpose
               </CardContent>
             </Card>
 
-            {/* POST */}
             <Card className="border-l-4 border-l-green-500">
               <CardHeader className="flex flex-row items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -241,7 +231,6 @@ public enum CategoryPurpose
               </CardContent>
             </Card>
 
-            {/* PUT */}
             <Card className="border-l-4 border-l-amber-500">
               <CardHeader className="flex flex-row items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -256,7 +245,6 @@ public enum CategoryPurpose
               </CardContent>
             </Card>
 
-            {/* DELETE */}
             <Card className="border-l-4 border-l-red-500">
               <CardHeader className="flex flex-row items-center justify-between">
                 <div className="flex items-center gap-3">
@@ -362,7 +350,7 @@ public enum CategoryPurpose
         </section>
 
       </div>
-    </SidebarLayout>
+    </div>
   )
 }
 

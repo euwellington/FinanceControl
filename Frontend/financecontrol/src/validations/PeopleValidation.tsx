@@ -14,6 +14,7 @@ export const rules: ValidationRules<IPeopleRequest> = {
         validate: (value) => {
             const ageNum = Number(value);
             if (isNaN(ageNum) || ageNum <= 0) return "Idade inválida";
+            if (ageNum > 120) return "Idade muito alta";
         },
     },
     email: {

@@ -1,13 +1,14 @@
 "use client"
 
 import { observer } from "mobx-react-lite"
-import SidebarLayout from "@/components/layout"
+import SidebarLayout from "@/components/layoutmain"
 import { useContext, useEffect } from "react"
 import { StoresContext } from "@/stores/inject"
 import DataTable from "./data-table"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Layers, TrendingUp, TrendingDown, Wallet } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
+import { EmptyState } from "@/components/empty"
 
 const PageCategoryReport = () => {
   const { reportStore } = useContext(StoresContext)
@@ -143,8 +144,13 @@ const PageCategoryReport = () => {
                 ))}
               </div>
             </div>
+          ) : reportData && reportData.totalRecords > 0 ? (
+            <DataTable data={reportData} />
           ) : (
-            reportData && <DataTable data={reportData} />
+            <EmptyState
+              title="Nenhuma categoria encontrada"
+              description="Não há registros de transações por categoria para exibir."
+            />
           )}
         </div>
       </div>

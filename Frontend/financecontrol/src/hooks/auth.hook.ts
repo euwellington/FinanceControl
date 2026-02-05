@@ -22,15 +22,17 @@ export const useAuth = () => {
                 toast.error(data.message);
                 return;
             }
+            else {
+                localStorage.setItem("@token", data.data);
 
-            localStorage.setItem("@token", data.data);
+                setSuccess(true);
+                toast.success("Login realizado com sucesso!");
 
-            setSuccess(true);
-            toast.success("Login realizado com sucesso!");
+                setTimeout(() => {
+                    window.location.href = '/dashboard';
+                }, 1000);
+            }
 
-            setTimeout(() => {
-                window.location.href = '/dashboard';
-            }, 1000);
 
         } catch (error: any) {
             setSuccess(false);

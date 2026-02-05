@@ -39,7 +39,7 @@ const RegisterPeople = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    e.stopPropagation(); // Impede que o "Enter" dispare eventos em formulários pai
+    e.stopPropagation(); 
 
     const validationErrors = PeopleValidation(request as any);
     if (Object.keys(validationErrors).length > 0) {

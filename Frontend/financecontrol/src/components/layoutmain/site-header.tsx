@@ -11,13 +11,12 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { observer } from "mobx-react-lite"
-import { useLocation, Link } from "react-router-dom" // Importes do React Router
+import { useLocation } from "react-router-dom" // Importes do React Router
 import React from "react"
 
 const SiteHeader = () => {
     const location = useLocation()
     
-    // Divide a path: "/config/usuarios" -> ["config", "usuarios"]
     const pathnames = location.pathname.split("/").filter((x) => x)
 
     return (
@@ -30,10 +29,6 @@ const SiteHeader = () => {
                 />
                 <Breadcrumb>
                     <BreadcrumbList>
-                        {/* {pathnames.length > 0 && (
-                            <BreadcrumbSeparator className="hidden md:block" />
-                        )} */}
-
                         {pathnames.map((value, index) => {
                             const last = index === pathnames.length - 1
                             const to = `/${pathnames.slice(0, index + 1).join("/")}`
@@ -48,7 +43,7 @@ const SiteHeader = () => {
                                             <BreadcrumbPage>{label}</BreadcrumbPage>
                                         ) : (
                                             <BreadcrumbLink asChild className="hidden md:block">
-                                                <Link to={to}>{label}</Link>
+                                                <div>{label}</div>
                                             </BreadcrumbLink>
                                         )}
                                     </BreadcrumbItem>

@@ -16,16 +16,29 @@ import PageCategoryReport from "@/pages/report/category";
 
 import PageDocBackendOverview from "@/pages/doc/backend/overview";
 import PageDocBackendAuth from "@/pages/doc/backend/auth";
+import PageDocBackendDashboard from "@/pages/doc/backend/dashboard";
 import PageDocBackendPeople from "@/pages/doc/backend/people";
 import PageDocBackendCategory from "@/pages/doc/backend/category";
 import PageDocBackendTransaction from "@/pages/doc/backend/transaction";
 import PageDocBackendReport from "@/pages/doc/backend/report";
 
+import PageDocFrontendOverview from "@/pages/doc/frontend/overview";
+import PageDocFrontendAuth from "@/pages/doc/frontend/auth";
+import PageDocFrontendDashboard from "@/pages/doc/frontend/dashboard";
+import PageDocFrontendPeople from "@/pages/doc/frontend/people";
+import PageDocFrontendCategory from "@/pages/doc/frontend/category";
+import PageDocFrontendTransaction from "@/pages/doc/frontend/transaction";
+import PageDocFrontendReport from "@/pages/doc/frontend/report";
+
+import SidebarLoginLayout from '@/components/layoutlogin';
+import SidebarLayout from "@/components/layoutmain"
+
+
 const TOKEN_KEY = "@token";
 
 const AuthService = {
   getToken: () => localStorage.getItem(TOKEN_KEY),
-  
+
   isValid: (): boolean => {
     const token = AuthService.getToken();
     if (!token) return false;
@@ -76,16 +89,39 @@ const RouteLogin = () => {
         <Route path="/relatorios/pessoas" element={<PagePeopleReport />} />
         <Route path="/relatorios/categorias" element={<PageCategoryReport />} />
 
-        {/* Doc  */}
-        <Route path="/docs/backend/visao-geral" element={<PageDocBackendOverview />} />
-        <Route path="/docs/backend/autenticacao" element={<PageDocBackendAuth />} />
-        <Route path="/docs/backend/pessoas" element={<PageDocBackendPeople />} />
-        <Route path="/docs/backend/categorias" element={<PageDocBackendCategory />} />
-        <Route path="/docs/backend/transacoes" element={<PageDocBackendTransaction />} />
-        <Route path="/docs/backend/relatorios" element={<PageDocBackendReport />} />
+        {/* Doc */}
+        <Route path="/docs/backend/visao-geral" element={<SidebarLayout><PageDocBackendOverview /></SidebarLayout>} />
+        <Route path="/docs/backend/autenticacao" element={<SidebarLayout><PageDocBackendAuth /></SidebarLayout>} />
+        <Route path="/docs/backend/dashboard" element={<SidebarLayout><PageDocBackendDashboard /></SidebarLayout>} />
+        <Route path="/docs/backend/pessoas" element={<SidebarLayout><PageDocBackendPeople /></SidebarLayout>} />
+        <Route path="/docs/backend/categorias" element={<SidebarLayout><PageDocBackendCategory /></SidebarLayout>} />
+        <Route path="/docs/backend/transacoes" element={<SidebarLayout><PageDocBackendTransaction /></SidebarLayout>} />
+        <Route path="/docs/backend/relatorios" element={<SidebarLayout><PageDocBackendReport /></SidebarLayout>} />
 
-
+        <Route path="/docs/frontend/visao-geral" element={<SidebarLayout><PageDocFrontendOverview /></SidebarLayout>} />
+        <Route path="/docs/frontend/autenticacao" element={<SidebarLayout><PageDocFrontendAuth /></SidebarLayout>} />
+        <Route path="/docs/frontend/dashboard" element={<SidebarLayout><PageDocFrontendDashboard /></SidebarLayout>} />
+        <Route path="/docs/frontend/pessoas" element={<SidebarLayout><PageDocFrontendPeople /></SidebarLayout>} />
+        <Route path="/docs/frontend/categorias" element={<SidebarLayout><PageDocFrontendCategory /></SidebarLayout>} />
+        <Route path="/docs/frontend/transacoes" element={<SidebarLayout><PageDocFrontendTransaction /></SidebarLayout>} />
+        <Route path="/docs/frontend/relatorios" element={<SidebarLayout><PageDocFrontendReport /></SidebarLayout>} />
       </Route>
+
+      <Route path="/docs/public/backend/visao-geral" element={<SidebarLoginLayout><PageDocBackendOverview /></SidebarLoginLayout>} />
+      <Route path="/docs/public/backend/autenticacao" element={<SidebarLoginLayout><PageDocBackendAuth /></SidebarLoginLayout>} />
+      <Route path="/docs/public/backend/dashboard" element={<SidebarLoginLayout><PageDocBackendDashboard /></SidebarLoginLayout>} />
+      <Route path="/docs/public/backend/pessoas" element={<SidebarLoginLayout><PageDocBackendPeople /></SidebarLoginLayout>} />
+      <Route path="/docs/public/backend/categorias" element={<SidebarLoginLayout><PageDocBackendCategory /></SidebarLoginLayout>} />
+      <Route path="/docs/public/backend/transacoes" element={<SidebarLoginLayout><PageDocBackendTransaction /></SidebarLoginLayout>} />
+      <Route path="/docs/public/backend/relatorios" element={<SidebarLoginLayout><PageDocBackendReport /></SidebarLoginLayout>} />
+
+      <Route path="/docs/public/frontend/visao-geral" element={<SidebarLoginLayout><PageDocFrontendOverview /></SidebarLoginLayout>} />
+      <Route path="/docs/public/frontend/autenticacao" element={<SidebarLoginLayout><PageDocFrontendAuth /></SidebarLoginLayout>} />
+      <Route path="/docs/public/frontend/dashboard" element={<SidebarLoginLayout><PageDocFrontendDashboard /></SidebarLoginLayout>} />
+      <Route path="/docs/public/frontend/pessoas" element={<SidebarLoginLayout><PageDocFrontendPeople /></SidebarLoginLayout>} />
+      <Route path="/docs/public/frontend/categorias" element={<SidebarLoginLayout><PageDocFrontendCategory /></SidebarLoginLayout>} />
+      <Route path="/docs/public/frontend/transacoes" element={<SidebarLoginLayout><PageDocFrontendTransaction /></SidebarLoginLayout>} />
+      <Route path="/docs/public/frontend/relatorios" element={<SidebarLoginLayout><PageDocFrontendReport /></SidebarLoginLayout>} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>

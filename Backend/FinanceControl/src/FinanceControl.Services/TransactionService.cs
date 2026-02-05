@@ -119,11 +119,33 @@ public class TransactionService : BaseService, ITransactionService
     {
         try
         {
-            var validation = ExecuteValidation(new TransactionValidation(_peopleRepository, _categoryRepository, true), request);
+            var validation = await ExecuteValidationAsync(new TransactionValidation(_peopleRepository, _categoryRepository, true), request);
             if (validation.Error) return validation;
 
             var update = await _transactionRepository.Update(request);
             if (update.Error) return update;
+
+            // Dispara a notificação via Hub em paralelo, sem travar o fluxo
+            _ = Task.Run(async () =>
+            {
+                try
+                {
+                    // Monta o objeto HubTransaction com os dados completos
+                    var hubData = new HubTransaction
+                    {
+                        Transaction = request,
+                        People = await _peopleRepository.GetById(request.PersonId), // pega a pessoa
+                        Category = await _categoryRepository.GetById(request.CategoryId) // pega a categoria
+                    };
+
+                    // Envia para todos os clientes conectados
+                    await _hubService.HandlerStatusTransitions(hubData);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Erro ao enviar notificação de transação via Hub");
+                }
+            });
 
             return update;
         }
