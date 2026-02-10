@@ -36,11 +36,15 @@ cd FinanceControl/Backend/FinanceControl
 # Inicie os serviços via Docker
 docker-compose up -d</code></pre>
 
+Acesso Swagger: http://localhost:5701/swagger/index.html
+
 <h3>2. Setup do Dashboard (Frontend)</h3>
 <p>O frontend utiliza Vite para performance extrema durante o desenvolvimento.</p>
 <pre><code>cd FinanceControl/Frontend/financecontro
 npm install
 npm run dev</code></pre>
+
+Acesso Frontend: http://localhost:5173
 
 <hr>
 
