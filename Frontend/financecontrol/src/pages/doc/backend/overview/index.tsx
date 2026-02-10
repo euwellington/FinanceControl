@@ -84,7 +84,11 @@ const DocBackendOverview = () => {
                     <p className="text-white mb-4 italic">git clone https://github.com/euwellington/FinanceControl.git</p>
                     
                     <p className="text-emerald-400"># 2. Inicie a infraestrutura</p>
-                    <p className="text-white italic">docker-compose up -d</p>
+                    <p className="text-white italic mb-4">docker-compose up -d</p>
+
+                    <p className="text-emerald-400"># 3. Acesso Swagger</p>
+                    <p className="text-white italic">http://localhost:5701/swagger/index.html</p>
+                    
                 </div>
             </div>
             
