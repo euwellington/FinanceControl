@@ -156,7 +156,9 @@ const DocFrontendOverview = () => {
                       <p className="text-slate-500 italic"># Instale e rode (NPM ou Yarn)</p>
                       <p className="text-blue-300">npm install && npm run dev</p>
                       <p className="text-slate-500 my-1">ou</p>
-                      <p className="text-purple-300">yarn install && yarn dev</p>
+                      <p className="text-purple-300 mb-2">yarn install && yarn dev</p>
+                      <p className="text-slate-500 italic"># Acesse a aplicação</p>
+                      <p className="text-blue-300">http://localhost:5173/</p>
                    </div>
                 </div>
               </div>
